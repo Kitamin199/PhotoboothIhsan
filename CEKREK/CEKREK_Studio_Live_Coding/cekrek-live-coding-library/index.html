@@ -10,6 +10,44 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  
+  <!-- NAVBAR START -->
+    <nav class="navbar">
+        <div class="wrapper">
+
+            <div class="logo">
+                <img src="gambar/logoCekRek.png" alt="Logo CekRek">
+            </div>
+
+            <div class="menu-toggle">
+                <span>Menu</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="#" class="active">Beranda</a></li>
+                <li><a href="#">Studio Booth</a></li>
+                <li><a href="#">Tentang</a></li>
+                <li><a href="#">Galeri Frame</a></li>
+                <li><a href="#">Studio Lengkap</a></li>
+                <li><a href="#">Komentar</a></li>
+            </ul>
+            
+            <a href="#" class="btn-mulai">Mulai Foto</a>
+        
+        </div>
+    </nav>
+    
+<script>
+    const menuToggle= document.querySelector('.menu-toggle');
+    const navMenu= document.querySelector('.nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    }); 
+</script>    
+
+<!-- NAVBAR END -->
+
   <main class="studio">
     <h1>STUDIO PHOTOBOOTH</h1>
     <p class="subjudul">COBA KAMERA LANGSUNG DISINI</p>
