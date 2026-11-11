@@ -1,0 +1,168 @@
+@font-face { font-family: Fredoka; src: url('assets/fredoka-one.ttf'); }
+@font-face { font-family: Jakarta; src: url('assets/jakarta-400.ttf'); }
+* { box-sizing: border-box; }
+body { margin: 0; background: #f5da69; color: #222; font-family: Jakarta, Arial, sans-serif; }
+
+/* Halaman studio */
+.studio { 
+  width: 90%; 
+  max-width: 1100px; 
+  margin: 50px auto; 
+}
+h1 { 
+  margin: 0; 
+  font: 48px Fredoka, sans-serif; 
+}
+.subjudul { 
+  margin: 5px 0 25px; 
+  color: #7a3e53; 
+}
+.kotak-studio { 
+  background: #faf8ec; 
+  border-radius: 18px; 
+  overflow: hidden; 
+}
+h2 { 
+  margin: 0; 
+  padding: 20px; 
+  border-bottom: 1px solid #ccc; 
+  color: #7a3e53; 
+  font-size: 16px; 
+}
+
+/* Area kamera dan frame */
+.isi-studio { 
+  display: flex; 
+  gap: 25px; 
+  padding: 30px; 
+}
+.kotak-kamera { 
+  flex: 3; 
+  min-height: 360px; 
+  background: #eae4d2; 
+  border-radius: 15px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  position: relative; 
+  overflow: hidden; 
+}
+video { 
+  position: absolute; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transform: scaleX(-1); 
+}
+.bagian-frame { 
+  flex: 1; 
+  min-width: 180px; 
+  text-align: center; 
+}
+.pilihan-frame { 
+  display: flex; 
+  gap: 10px; 
+  padding: 12px; 
+  background: #eae4d2; 
+  border-radius: 12px; 
+}
+.pilih-frame { 
+  flex: 1; 
+  min-width: 0; 
+  padding: 6px; 
+  border: 2px solid transparent; 
+  border-radius: 8px; 
+  background: transparent; 
+  cursor: pointer; 
+  font-family: inherit; 
+}
+.pilih-frame > span:last-child { 
+  display: block; 
+  margin-top: 7px; 
+  font-size: 12px; 
+}
+.dipilih { 
+  border-color: #fb71a4; 
+}
+
+/* Bingkai yang sama dipakai di preview dan hasil PNG */
+.bingkai { 
+  display: grid; 
+  gap: 6px; 
+  width: 180px; 
+  aspect-ratio: 1 / 2; 
+  padding: 10px 10px 28px; 
+  background: #faf8ec; 
+}
+.slot { 
+  background: #eae4d2; 
+  overflow: hidden; 
+  min-width: 0; 
+  min-height: 0; 
+}
+.slot img { 
+  display: block; 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+.campuran { 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1.35fr 1fr; 
+}
+.campuran .slot:last-child { 
+  grid-column: span 2; 
+}
+.bertumpuk { 
+  grid-template-columns: 1fr; 
+  grid-template-rows: repeat(3, 1fr); 
+}
+.contoh { 
+  width: 100%; 
+  gap: 3px; 
+  padding: 5px 5px 15px; 
+}
+#hasil {
+  width: min(170px, 80%); 
+}
+
+/* Tombol */
+button { 
+  cursor: pointer; 
+  font-family: inherit; 
+}
+#nyalakan, #unduh, #ulang { 
+  border: 0; 
+  padding: 14px 18px; 
+  background: #fb71a4; 
+  color: white; 
+  border-radius: 12px; 
+  margin: 10px 2px; 
+}
+#jepret { 
+  display: block; 
+  width: 75px; 
+  height: 75px; 
+  margin: 25px auto; 
+  background: #fb71a4; 
+  border: 7px solid #eae4d2; 
+  border-radius: 50%; 
+}
+#jepret:disabled { 
+  opacity: .45; 
+  cursor: not-allowed; 
+}
+#pesan { 
+  padding: 0 30px 25px; 
+  color: #7a3e53; 
+}
+[hidden] { display: none !important; }
+
+/* Tampilan HP */
+@media (max-width: 700px) {
+  h1 { font-size: 32px; }
+  .isi-studio { flex-direction: column; padding: 15px; }
+  .kotak-kamera { min-height: 380px; }
+  .bagian-frame { max-width: 270px; width: 100%; margin: auto; }
+  #pesan { padding: 0 15px 20px; }
+}

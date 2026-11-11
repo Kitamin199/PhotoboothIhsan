@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CEKREK Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Library untuk mengubah frame HTML menjadi PNG -->
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="studio">
+    <h1>STUDIO PHOTOBOOTH</h1>
+    <p class="subjudul">COBA KAMERA LANGSUNG DISINI</p>
+
+    <section class="kotak-studio">
+      <h2>● PHOTOBOOTH / LIVE STUDIO</h2>
+      <div class="isi-studio">
+        <div class="kotak-kamera">
+          <video id="kamera" autoplay muted playsinline hidden></video>
+          <button id="nyalakan">NYALAKAN KAMERA</button>
+
+          <!-- Bingkai hasil memakai CSS yang sama dengan pilihan frame -->
+          <div id="hasil" class="bingkai campuran" hidden>
+            <div class="slot"><img alt="Foto 1"></div>
+            <div class="slot"><img alt="Foto 2"></div>
+            <div class="slot"><img alt="Foto 3"></div>
+          </div>
+        </div>
+
+        <div class="bagian-frame">
+          <div class="pilihan-frame">
+            <button id="campuran" class="pilih-frame dipilih" aria-label="Pilih frame campuran" aria-pressed="true">
+              <span class="bingkai campuran contoh"><span class="slot"></span><span class="slot"></span><span class="slot"></span></span>
+              <span>Campuran</span>
+            </button>
+            <button id="bertumpuk" class="pilih-frame" aria-label="Pilih frame barisan" aria-pressed="false">
+              <span class="bingkai bertumpuk contoh"><span class="slot"></span><span class="slot"></span><span class="slot"></span></span>
+              <span>Barisan</span>
+            </button>
+          </div>
+          <button id="jepret" aria-label="Ambil foto" disabled></button>
+          <button id="unduh" hidden>Unduh PNG</button>
+          <button id="ulang" hidden>Foto Ulang</button>
+        </div>
+      </div>
+      <p id="pesan" role="status">Pilih frame, nyalakan kamera, lalu ambil 3 foto.</p>
+    </section>
+  </main>
+</body>
+</html>
