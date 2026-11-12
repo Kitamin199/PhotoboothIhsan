@@ -100,28 +100,28 @@
 
 .kamera {
   width: 150px;
-  top: 30%;                          
-  left: calc(50% + min(18vw, 340px));
+  top: 20%;                          
+  left: calc(60% + min(18vw, 340px));
   rotate: 10deg;
   animation: besar 2s ease-in-out infinite; 
 }
 
 .sparkle {                         
   width: 40px;
-  top: 24%;
-  left: calc(50% + min(13vw, 250px));
+  top: 13%;
+  left: calc(64% + min(13vw, 250px));
   animation: kecil 2.4s ease-in-out infinite; 
 }
 .sparkle.s2 {                        
   width: 24px;
-  top: 45%;
-  left: calc(50% + min(27vw, 500px));
+  top: 40%;
+  left: calc(60% + min(27vw, 500px));
   animation-delay: 0.8s;             
 }
 .sparkle.s3 {                       
   width: 34px;
   top: 48%;
-  left: calc(50% - min(26vw, 500px));
+  left: calc(40% - min(26vw, 500px));
   animation-delay: 1.5s;
 }
 @keyframes besar {                  

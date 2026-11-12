@@ -7,13 +7,17 @@
 
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/landing.css">
   <link rel="stylesheet" href="css/galeri-frame.css">
   <link rel="stylesheet" href="css/kamera.css">
+  <link rel="stylesheet" href="css/faq.css">
 
   <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js" defer></script>
   <script src="js/navbar.js" defer></script>
+  <script src="js/landing.js" defer></script>
   <script src="js/galeri-frame.js" defer></script>
   <script src="js/kamera.js" defer></script>
+  <script src="js/faq.js" defer></script>
 </head>
 <body>
   
@@ -29,24 +33,48 @@
       </div>
 
       <ul class="nav-menu">
-        <li><a href="#" class="active">Beranda</a></li>
-        <li><a href="#">Studio Booth</a></li>
+        <li><a href="#beranda" class="active">Beranda</a></li>
+        <li><a href="#studio">Studio Booth</a></li>
         <li><a href="#galeri-frame">Galeri Frame</a></li>
-        <li><a href="#">FAQ</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
       
-      <a href="#" class="btn-mulai">Mulai Foto</a>
+      <a href="#studio" class="btn-mulai">Mulai Foto</a>
     </div>
   </nav>
   <!-- NAVBAR END -->
 
-  <!-- GALERI FRAME SECTION (SETELAH LANDING PAGE, SEBELUM KAMERA) -->
+  <!-- HERO / LANDING PAGE SECTION -->
+  <section class="hero" id="beranda"> 
+    <div>
+        <p class="label"><span class="garis"></span> PHOTOBOOTH STUDIO <span class="garis"></span></p>
+    </div>
+
+    <div class="tulisan">
+        <h1 class="judul atas">Sekali CekRek,</h1>
+        <h1 class="judul bawah">Abadikan Momen!</h1>
+        <p class="deskripsi">Pilih frame favoritmu, ambil foto bersama teman, <br> dan simpan setiap momen berharga dengan mudah!</p>
+    </div>
+
+    <div class="tombol-grup">
+        <a href="#studio" class="startbutton">Mulai Foto Sekarang</a>
+        <a href="#galeri-frame" class="galeriframe">Lihat Frame</a>
+    </div>
+
+    <div class="bunnystrip"><img src="gambar/Strip-Film.png" alt=""></div>
+    <div class="kamera"><img src="gambar/Kamera.png" alt=""></div>
+    <div class="sparkle"><img src="gambar/Sparkle.png" alt=""></div>
+    <div class="sparkle s2"><img src="gambar/Sparkle.png" alt=""></div> 
+    <div class="sparkle s3"><img src="gambar/Sparkle.png" alt=""></div>
+  </section>
+
+  <!-- GALERI FRAME SECTION -->
   <section id="galeri-frame" class="galeri-frame-section">
     <div class="container">
       <div class="close-btn">&times;</div>
 
       <div class="header">
-        <h1>Galeri frame</h1>
+        <h1>Galeri Frame</h1>
         <p>Pilih layout untuk melihat template yang tersedia & bersiap untuk sesi foto.</p>
       </div>
 
@@ -71,9 +99,7 @@
         <div class="card yellow" onclick="selectCard(this)">
           <span class="badge-terpilih">&#10003; Terpilih</span>
           <div class="frame-box">
-            <div class="frame-box">
             <img src="gambar/frame2.png" alt="Frame 2">
-          </div>
           </div>
           <div class="info">
             <h3>Frame 2</h3>
@@ -86,9 +112,7 @@
         <div class="card purple" onclick="selectCard(this)">
           <span class="badge-terpilih">&#10003; Terpilih</span>
           <div class="frame-box">
-            <div class="frame-box">
-            <img src="gambar/frame3.png" alt="Frame 4 Cut">
-          </div>
+            <img src="gambar/frame3.png" alt="Frame 3">
           </div>
           <div class="info">
             <h3>Frame 3</h3>
@@ -116,7 +140,7 @@
   </section>
 
   <!-- STUDIO KAMERA SECTION -->
-  <main class="studio">
+  <main class="studio" id="studio">
     <h1>STUDIO PHOTOBOOTH</h1>
     <p class="subjudul">COBA KAMERA LANGSUNG DISINI</p>
 
@@ -154,6 +178,42 @@
       <p id="pesan" role="status">Pilih frame, nyalakan kamera, lalu ambil 3 foto.</p>
     </section>
   </main>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <h2>FAQ</h2>
+
+    <div class="item">
+      <button class="pertanyaan">1. Apa itu CekRek?<span class="panah"></span></button>
+      <p class="jawaban">CekRek adalah website photobooth online yang memungkinkan pengguna mengambil foto dengan berbagai pilihan template menarik.</p>
+    </div>
+
+    <div class="item">
+      <button class="pertanyaan">2. Bagaimana cara menggunakan CekRek?<span class="panah"></span></button>
+      <p class="jawaban">Pilih template, izinkan akses kamera, ambil foto, lalu unduh hasilnya.</p>
+    </div>
+
+    <div class="item">
+      <button class="pertanyaan">3. Apakah CekRek gratis?<span class="panah"></span></button>
+      <p class="jawaban">Ya, CekRek bisa digunakan gratis.</p>
+    </div>
+
+    <div class="item">
+      <button class="pertanyaan">4. Apakah saya perlu menginstal aplikasi untuk menggunakan CekRek?<span class="panah"></span></button>
+      <p class="jawaban">Tidak perlu. CekRek langsung dibuka lewat browser.</p>
+    </div>
+  </section>
+  <!-- FAQ END -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <img src="gambar/logoCekrek.png" alt="Logo CekRek" class="footer-logo">
+    <div class="tengah">
+      <p class="tagline">Photobooth Online</p>
+      <hr>
+      <p class="copy">&copy; 2026 CekRek</p>
+    </div>
+  </footer>
 
 </body>
 </html>
