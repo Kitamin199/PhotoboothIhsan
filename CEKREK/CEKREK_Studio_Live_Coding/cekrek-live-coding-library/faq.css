@@ -1,0 +1,97 @@
+/* ---------- FAQ ---------- */
+.faq {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* reset gaya h2 milik tim supaya tidak ikut kecil dan bergaris */
+.faq h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  margin: 0 0 24px;
+  padding: 0;
+  border: none;
+  color: var(--color-ink);
+}
+
+.item {
+  background: white;
+  border: 3px solid var(--color-ink);
+  border-radius: 40px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.pertanyaan {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 28px;
+  background: white;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.jawaban {
+  display: none;
+  margin: 0;
+  padding: 16px 28px 20px;
+  border-top: 3px solid var(--color-ink);
+  background: white;
+  font-size: 15px;
+}
+
+.panah {
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+  transform: rotate(45deg);
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+/* saat dibuka */
+.item.buka .pertanyaan { background: var(--color-pink); }
+.item.buka .jawaban    { display: block; }
+.item.buka .panah {
+  transform: rotate(-135deg);
+  margin-top: 6px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  background: var(--color-pink);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  color: white;
+  text-align: center;
+}
+
+.footer-logo { height: 70px; }
+.tengah  { flex: 1; }
+.tagline { margin: 0 0 10px; font-size: 18px; }
+.copy    { margin: 10px 0 0; font-size: 13px; }
+
+.footer hr {
+  width: 70%;
+  margin: 0 auto;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* tampilan HP */
+@media (max-width: 600px) {
+  .footer { flex-direction: column; gap: 12px; padding: 16px; }
+  .pertanyaan { padding: 16px 20px; font-size: 16px; }
+  .jawaban { padding: 14px 20px 18px; }
+}
