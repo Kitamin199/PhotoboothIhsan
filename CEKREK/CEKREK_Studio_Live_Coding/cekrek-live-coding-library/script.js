@@ -91,3 +91,19 @@ campuran.onclick = () => pilihFrame('campuran');
 bertumpuk.onclick = () => pilihFrame('bertumpuk');
 unduh.onclick = unduhFoto;
 ulang.onclick = fotoUlang;
+  const menuToggle= document.querySelector('.menu-toggle');
+    const navMenu= document.querySelector('.nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    }); 
+
+const tombol = document.querySelectorAll(".startbutton, .galeriframe");
+
+tombol.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const idTujuan = btn.getAttribute("href");
+    const tujuan = document.querySelector(idTujuan);
+  });
+});
