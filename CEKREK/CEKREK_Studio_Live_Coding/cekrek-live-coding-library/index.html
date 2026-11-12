@@ -4,79 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CEKREK Studio</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Library untuk mengubah frame HTML menjadi PNG -->
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/galeri-frame.css">
+  <link rel="stylesheet" href="css/kamera.css">
+
   <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js" defer></script>
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="faq.css">
-  <script src="faq.js" defer></script>
+  <script src="js/navbar.js" defer></script>
+  <script src="js/galeri-frame.js" defer></script>
+  <script src="js/kamera.js" defer></script>
 </head>
 <body>
   
   <!-- NAVBAR START -->
-    <nav class="navbar">
-        <div class="wrapper">
+  <nav class="navbar">
+    <div class="wrapper">
+      <div class="logo">
+        <img src="gambar/logoCekRek.png" alt="Logo CekRek">
+      </div>
 
-            <div class="logo">
-                <img src="gambar/logoCekRek.png" alt="Logo CekRek">
+      <div class="menu-toggle">
+        <span>Menu</span>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a href="#" class="active">Beranda</a></li>
+        <li><a href="#">Studio Booth</a></li>
+        <li><a href="#">Tentang</a></li>
+        <li><a href="#galeri-frame">Galeri Frame</a></li>
+        <li><a href="#">Studio Lengkap</a></li>
+        <li><a href="#">Komentar</a></li>
+      </ul>
+      
+      <a href="#" class="btn-mulai">Mulai Foto</a>
+    </div>
+  </nav>
+  <!-- NAVBAR END -->
+
+  <!-- GALERI FRAME SECTION (SETELAH LANDING PAGE, SEBELUM KAMERA) -->
+  <section id="galeri-frame" class="galeri-frame-section">
+    <div class="container">
+      <div class="close-btn">&times;</div>
+
+      <div class="header">
+        <h1>Galeri frame</h1>
+        <p>Pilih layout untuk melihat template yang tersedia & bersiap untuk sesi foto.</p>
+      </div>
+
+      <div class="grid">
+        <!-- Card 1: 4 CUT -->
+        <div class="card yellow active" onclick="selectCard(this)">
+          <span class="badge-terpilih">&#10003; Terpilih</span>
+          <div class="frame-box">
+            <img src="gambar/frame1.png" alt="Frame 1">
+          </div>
+          <div class="info">
+            <div class="info-header">
+              <h3>Frame 1</h3>
+              <span class="tag-populer">Populer</span>
             </div>
+            <p>Grid 2&times;2 (4 Foto)</p>
+          </div>
+          <button class="btn">Layout Aktif</button>
+        </div>
 
-            <div class="menu-toggle">
-                <span>Menu</span>
+        <!-- Card 2: 2 CUT -->
+        <div class="card yellow" onclick="selectCard(this)">
+          <span class="badge-terpilih">&#10003; Terpilih</span>
+          <div class="frame-box">
+            <div class="frame-box">
+            <img src="gambar/frame2.png" alt="Frame 2">
+          </div>
+          </div>
+          <div class="info">
+            <h3>Frame 2</h3>
+            <p>Wide Duo (2 Foto)</p>
+          </div>
+          <button class="btn">Pilih Frame</button>
+        </div>
+
+        <!-- Card 3: 4 STRIP -->
+        <div class="card purple" onclick="selectCard(this)">
+          <span class="badge-terpilih">&#10003; Terpilih</span>
+          <div class="frame-box">
+            <div class="frame-box">
+            <img src="gambar/frame3.png" alt="Frame 4 Cut">
+          </div>
+          </div>
+          <div class="info">
+            <h3>Frame 3</h3>
+            <p>Classic Vertikal (4 Foto)</p>
+          </div>
+          <button class="btn">Pilih Frame</button>
+        </div>
+
+        <!-- Card 4: 1 CUT -->
+        <div class="card green" onclick="selectCard(this)">
+          <span class="badge-terpilih">&#10003; Terpilih</span>
+          <div class="frame-box">
+            <div class="preview-grid-1cut">
+              Single Portrait
             </div>
-
-            <ul class="nav-menu">
-                <li><a href="#beranda" class="active">Beranda</a></li>
-                <li><a href="#studio">Studio Booth</a></li>
-                <li><a href="#">Tentang</a></li>
-                <li><a href="#">Galeri Frame</a></li>
-                <li><a href="#">Studio Lengkap</a></li>
-                <li><a href="#">Komentar</a></li>
-            </ul>
-            
-            <a href="#" class="btn-mulai">Mulai Foto</a>
-        
+          </div>
+          <div class="info">
+            <h3>1 CUT</h3>
+            <p>Single Frame (1 Foto)</p>
+          </div>
+          <button class="btn">Pilih Frame</button>
         </div>
-    </nav>
-    
-<script>
-    const menuToggle= document.querySelector('.menu-toggle');
-    const navMenu= document.querySelector('.nav-menu');
+      </div>
+    </div>
+  </section>
 
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    }); 
-</script>    
-
-<!-- NAVBAR END -->
-
-<!-- LANDING PAGE -->
-<section class="hero" id="beranda"> 
-
-        <div>
-            <p class="label"><span class="garis"></span> PHOTOBOOTH STUDIO <span class="garis"></span></p>
-        </div>
-
-        <div class="tulisan">
-            <h1 class="judul atas">Sekali CekRek,</h1>
-            <h1 class="judul bawah">Abadikan Momen!</h1>
-            <p class="deskripsi">Pilih frame favoritmu, ambil foto bersama teman, <br> dan simpan setiap momen berharga dengan mudah!</p>
-        </div>
-
-        <div class="tombol-grup">
-            <a href="#studio" class="startbutton">Mulai Foto Sekarang</a>
-            <a href="#galeri-frame" class="galeriframe">Lihat Frame</a>
-        </div>
-
-        <div class="bunnystrip"><img src="gambar/Strip-Film.png" alt=""></div>
-        <div class="kamera"><img src="gambar/Kamera.png" alt=""></div>
-        <div class="sparkle"><img src="gambar/Sparkle.png" alt=""></div>
-        <div class="sparkle s2"><img src="gambar/Sparkle.png" alt=""></div> 
-        <div class="sparkle s3"><img src="gambar/Sparkle.png" alt=""></div>
-
-    </section>
-
-  <main class="studio" id="studio">
+  <!-- STUDIO KAMERA SECTION -->
+  <main class="studio">
     <h1>STUDIO PHOTOBOOTH</h1>
     <p class="subjudul">COBA KAMERA LANGSUNG DISINI</p>
 
@@ -115,41 +157,5 @@
     </section>
   </main>
 
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <h2>FAQ</h2>
-
-    <div class="item">
-      <button class="pertanyaan">1. Apa itu CekRek?<span class="panah"></span></button>
-      <p class="jawaban">CekRek adalah website photobooth online yang memungkinkan pengguna mengambil foto dengan berbagai pilihan template menarik.</p>
-    </div>
-
-    <div class="item">
-      <button class="pertanyaan">2. Bagaimana cara menggunakan CekRek?<span class="panah"></span></button>
-      <p class="jawaban">Pilih template, izinkan akses kamera, ambil foto, lalu unduh hasilnya.</p>
-    </div>
-
-    <div class="item">
-      <button class="pertanyaan">3. Apakah CekRek gratis?<span class="panah"></span></button>
-      <p class="jawaban">Ya, CekRek bisa digunakan gratis.</p>
-    </div>
-
-    <div class="item">
-      <button class="pertanyaan">4. Apakah saya perlu menginstal aplikasi untuk menggunakan CekRek?<span class="panah"></span></button>
-      <p class="jawaban">Tidak perlu. CekRek langsung dibuka lewat browser.</p>
-    </div>
-  </section>
-  <!-- FAQ END -->
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <img src="gambar/logoCekrek.png" alt="Logo CekRek" class="footer-logo">
-    <div class="tengah">
-      <p class="tagline">Photobooth Online</p>
-      <hr>
-      <p class="copy">© 2026 CekRek</p>
-    </div>
-  </footer>
-  <!-- FOOTER END -->
 </body>
 </html>

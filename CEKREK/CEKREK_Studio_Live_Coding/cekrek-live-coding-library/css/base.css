@@ -1,0 +1,18 @@
+@font-face { font-family: Fredoka; src: url('../assets/fredoka-one.ttf'); }
+@font-face { font-family: Jakarta; src: url('../assets/jakarta-400.ttf'); }
+
+:root {
+  --font-sans: "Plus Jakarta Sans", sans-serif;  
+  --font-display: "Fredoka", cursive;            
+  --color-cream: #faf8ec;                      
+  --color-pink: #fb71a4;                        
+  --color-pink-dark: #e8508a;                    
+  --color-pink-soft: #fff0f6;                    
+  --color-plum: #7a3e53;                        
+  --color-ink: #222222;                          
+  --color-white: #ffffff;
+  --color-yellow: #f5da69;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-cream); color: #222; font-family: Jakarta, Arial, sans-serif; }
