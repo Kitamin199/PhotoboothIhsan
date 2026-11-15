@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="css/kamera.css">
   <link rel="stylesheet" href="css/faq.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js" defer></script>
   <script src="js/navbar.js" defer></script>
   <script src="js/landing.js" defer></script>
   <script src="js/galeri-frame.js" defer></script>
@@ -69,73 +68,96 @@
   </section>
 
   <!-- GALERI FRAME SECTION -->
-  <section id="galeri-frame" class="galeri-frame-section">
-    <div class="container">
-      <div class="close-btn">&times;</div>
+      <section id="galeri-frame" class="galeri-frame-section">
+        <div class="container">
+          <div class="close-btn">&times;</div>
 
-      <div class="header">
-        <h1>Galeri Frame</h1>
-        <p>Pilih layout untuk melihat template yang tersedia & bersiap untuk sesi foto.</p>
-      </div>
-
-      <div class="grid">
-        <!-- Card 1: 4 CUT -->
-        <div class="card yellow active" onclick="selectCard(this)">
-          <span class="badge-terpilih">&#10003; Terpilih</span>
-          <div class="frame-box">
-            <img src="gambar/frame1.png" alt="Frame 1">
+          <div class="header">
+            <h1>Galeri Frame</h1>
+            <p>Pilih layout untuk melihat template yang tersedia & bersiap untuk sesi foto.</p>
           </div>
-          <div class="info">
-            <div class="info-header">
-              <h3>Frame 1</h3>
-              <span class="tag-populer">Populer</span>
+
+          <div class="grid">
+            <div class="card yellow active" data-frame="1" onclick="selectCard(this)">
+              <span class="badge-terpilih">&#10003; Terpilih</span>
+              <div class="frame-box">
+                <img src="gambar/frame1.png" alt="Frame 1">
+              </div>
+              <div class="info">
+                <div class="info-header">
+                  <h3>Frame 1</h3>
+                  <span class="tag-populer">Populer</span>
+                </div>
+                <p>Grid 2&times;2 (4 Foto)</p>
+              </div>
+              <button class="btn">Layout Aktif</button>
             </div>
-            <p>Grid 2&times;2 (4 Foto)</p>
-          </div>
-          <button class="btn">Layout Aktif</button>
-        </div>
 
-        <!-- Card 2: 2 CUT -->
-        <div class="card yellow" onclick="selectCard(this)">
-          <span class="badge-terpilih">&#10003; Terpilih</span>
-          <div class="frame-box">
-            <img src="gambar/frame2.png" alt="Frame 2">
-          </div>
-          <div class="info">
-            <h3>Frame 2</h3>
-            <p>Wide Duo (2 Foto)</p>
-          </div>
-          <button class="btn">Pilih Frame</button>
-        </div>
+            <div class="card yellow" data-frame="2" onclick="selectCard(this)">
+              <span class="badge-terpilih">&#10003; Terpilih</span>
+              <div class="frame-box">
+                <img src="gambar/frame2.png" alt="Frame 2">
+              </div>
+              <div class="info">
+                <h3>Frame 2</h3>
+                <p>Wide Duo (2 Foto)</p>
+              </div>
+              <button class="btn">Pilih Frame</button>
+            </div>
 
-        <!-- Card 3: 4 STRIP -->
-        <div class="card purple" onclick="selectCard(this)">
-          <span class="badge-terpilih">&#10003; Terpilih</span>
-          <div class="frame-box">
-            <img src="gambar/frame3.png" alt="Frame 3">
-          </div>
-          <div class="info">
-            <h3>Frame 3</h3>
-            <p>Classic Vertikal (4 Foto)</p>
-          </div>
-          <button class="btn">Pilih Frame</button>
-        </div>
+            <div class="card purple" data-frame="3" onclick="selectCard(this)">
+              <span class="badge-terpilih">&#10003; Terpilih</span>
+              <div class="frame-box">
+                <img src="gambar/frame3.png" alt="Frame 3">
+              </div>
+              <div class="info">
+                <h3>Frame 3</h3>
+                <p>Classic Vertikal (4 Foto)</p>
+              </div>
+              <button class="btn">Pilih Frame</button>
+            </div>
 
-        <!-- Card 4: 1 CUT -->
-        <div class="card green" onclick="selectCard(this)">
-          <span class="badge-terpilih">&#10003; Terpilih</span>
-          <div class="frame-box">
-            <img src="gambar/frame4.png" alt="Frame 4">
-          </div>
-          <div class="info">
-            <h3>1 CUT</h3>
-            <p>Single Frame (1 Foto)</p>
-          </div>
-          <button class="btn">Pilih Frame</button>
+            <div class="card green" data-frame="4" onclick="selectCard(this)">
+              <span class="badge-terpilih">&#10003; Terpilih</span>
+              <div class="frame-box">
+                <img src="gambar/frame4.png" alt="Frame 4">
+              </div>
+              <div class="info">
+                <h3>1 CUT</h3>
+                <p>Single Frame (1 Foto)</p>
+              </div>
+              <button class="btn">Pilih Frame</button>
+            </div>
+
+            <div class="card yellow" data-frame="5" onclick="selectCard(this)">
+              <span class="badge-terpilih">&#10003; Terpilih</span>
+              <div class="frame-box">
+                <img src="gambar/framee5.png" alt="Frame 5">
+              </div>
+              <div class="info">
+                <div class="info-header">
+                  <h3>Frame 5</h3>
+                </div>
+                <p>Grid 2&times;2 (4 Foto)</p>
+              </div>
+              <button class="btn">Pilih Frame</button>
+            </div>
+
+            <div class="card yellow" data-frame="6" onclick="selectCard(this)">
+              <span class="badge-terpilih">&#10003; Terpilih</span>
+              <div class="frame-box">
+                <img src="gambar/framee6.png" alt="Frame 6">
+              </div>
+              <div class="info">
+                <h3>Frame Hibachi Mana</h3>
+                <p>Wide Duo (2 Foto)</p>
+              </div>
+              <button class="btn">Pilih Frame</button>
+            </div>
+
+          </div> <!-- Penutup div.grid -->
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
   <!-- STUDIO KAMERA SECTION -->
   <main class="studio" id="studio">
@@ -146,34 +168,24 @@
       <h2>● PHOTOBOOTH / LIVE STUDIO</h2>
       <div class="isi-studio">
         <div class="kotak-kamera">
-          <video id="kamera" autoplay muted playsinline hidden></video>
-          <button id="nyalakan">NYALAKAN KAMERA</button>
-
-          <!-- Bingkai hasil memakai CSS yang sama dengan pilihan frame -->
-          <div id="hasil" class="bingkai campuran" hidden>
-            <div class="slot"><img alt="Foto 1"></div>
-            <div class="slot"><img alt="Foto 2"></div>
-            <div class="slot"><img alt="Foto 3"></div>
+          <!-- Panggung: lubang foto (slot) + video kamera + frame di paling atas -->
+          <div id="panggung" class="panggung">
+            <div id="wadah-slot"></div>
+            <video id="kamera" autoplay muted playsinline hidden></video>
+            <img id="bingkai-atas" alt="Frame terpilih">
           </div>
+          <button id="nyalakan">NYALAKAN KAMERA</button>
         </div>
 
         <div class="bagian-frame">
-          <div class="pilihan-frame">
-            <button id="campuran" class="pilih-frame dipilih" aria-label="Pilih frame campuran" aria-pressed="true">
-              <span class="bingkai campuran contoh"><span class="slot"></span><span class="slot"></span><span class="slot"></span></span>
-              <span>Campuran</span>
-            </button>
-            <button id="bertumpuk" class="pilih-frame" aria-label="Pilih frame barisan" aria-pressed="false">
-              <span class="bingkai bertumpuk contoh"><span class="slot"></span><span class="slot"></span><span class="slot"></span></span>
-              <span>Barisan</span>
-            </button>
-          </div>
+          <p class="info-frame">Frame terpilih:<br><strong id="nama-frame">Frame 1</strong></p>
+          <a href="#galeri-frame" class="ganti-frame">Ganti frame</a>
           <button id="jepret" aria-label="Ambil foto" disabled></button>
           <button id="unduh" hidden>Unduh PNG</button>
           <button id="ulang" hidden>Foto Ulang</button>
         </div>
       </div>
-      <p id="pesan" role="status">Pilih frame, nyalakan kamera, lalu ambil 3 foto.</p>
+      <p id="pesan" role="status">Pilih frame di Galeri Frame, nyalakan kamera, lalu ambil 3 foto.</p>
     </section>
   </main>
 

@@ -41,59 +41,28 @@ h2 {
   align-items: center; 
   position: relative; 
   overflow: hidden; 
-}
-video { 
-  position: absolute; 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  transform: scaleX(-1); 
-}
-.bagian-frame { 
-  flex: 1; 
-  min-width: 180px; 
-  text-align: center; 
-}
-.pilihan-frame { 
-  display: flex; 
-  gap: 10px; 
-  padding: 12px; 
-  background: #eae4d2; 
-  border-radius: 12px; 
-}
-.pilih-frame { 
-  flex: 1; 
-  min-width: 0; 
-  padding: 6px; 
-  border: 2px solid transparent; 
-  border-radius: 8px; 
-  background: transparent; 
-  cursor: pointer; 
-  font-family: inherit; 
-}
-.pilih-frame > span:last-child { 
-  display: block; 
-  margin-top: 7px; 
-  font-size: 12px; 
-}
-.dipilih { 
-  border-color: #fb71a4; 
+  padding: 20px;
 }
 
-/* Bingkai yang sama dipakai di preview dan hasil PNG */
-.bingkai { 
-  display: grid; 
-  gap: 6px; 
-  width: 180px; 
-  aspect-ratio: 1 / 2; 
-  padding: 10px 10px 28px; 
-  background: #faf8ec; 
+/* Panggung = tampilan frame ala photobooth asli.
+   Susunan lapisan: slot foto (bawah) -> video kamera -> gambar frame (atas) */
+.panggung {
+  --rasio: 0.5;
+  position: relative;
+  width: min(100%, calc(660px * var(--rasio)));
+  aspect-ratio: var(--rasio);
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
+}
+#wadah-slot { 
+  position: absolute; 
+  inset: 0; 
+  z-index: 1; 
 }
 .slot { 
-  background: #eae4d2; 
+  position: absolute; 
+  background: #d9d2bd; 
   overflow: hidden; 
-  min-width: 0; 
-  min-height: 0; 
 }
 .slot img { 
   display: block; 
@@ -101,24 +70,46 @@ video {
   height: 100%; 
   object-fit: cover; 
 }
-.campuran { 
-  grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1.35fr 1fr; 
+.slot img:not([src]) { 
+  visibility: hidden; 
 }
-.campuran .slot:last-child { 
-  grid-column: span 2; 
+#kamera { 
+  position: absolute; 
+  z-index: 2; 
+  object-fit: cover; 
+  transform: scaleX(-1); 
 }
-.bertumpuk { 
-  grid-template-columns: 1fr; 
-  grid-template-rows: repeat(3, 1fr); 
-}
-.contoh { 
+#bingkai-atas { 
+  position: absolute; 
+  inset: 0; 
   width: 100%; 
-  gap: 3px; 
-  padding: 5px 5px 15px; 
+  height: 100%; 
+  z-index: 3; 
+  pointer-events: none; 
 }
-#hasil {
-  width: min(170px, 80%); 
+
+/* Panel kanan */
+.bagian-frame { 
+  flex: 1; 
+  min-width: 180px; 
+  text-align: center; 
+}
+.info-frame { 
+  margin: 0; 
+  padding: 14px; 
+  background: #eae4d2; 
+  border-radius: 12px; 
+  color: #7a3e53; 
+  font-size: 13px; 
+}
+.info-frame strong { 
+  font-size: 18px; 
+}
+.ganti-frame { 
+  display: inline-block; 
+  margin-top: 10px; 
+  color: #fb71a4; 
+  font-size: 13px; 
 }
 
 /* Tombol Studio */
@@ -133,6 +124,15 @@ button {
   color: white; 
   border-radius: 12px; 
   margin: 10px 2px; 
+}
+#nyalakan { 
+  position: absolute; 
+  z-index: 5; 
+  left: 50%; 
+  bottom: 28px; 
+  transform: translateX(-50%); 
+  margin: 0; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .3); 
 }
 #jepret { 
   display: block; 
@@ -157,7 +157,8 @@ button {
 @media (max-width: 700px) {
   h1 { font-size: 32px; }
   .isi-studio { flex-direction: column; padding: 15px; }
-  .kotak-kamera { min-height: 380px; }
+  .kotak-kamera { min-height: 380px; padding: 12px; }
+  .panggung { width: min(100%, calc(560px * var(--rasio))); }
   .bagian-frame { max-width: 270px; width: 100%; margin: auto; }
   #pesan { padding: 0 15px 20px; }
 }
