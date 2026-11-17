@@ -1,4 +1,3 @@
-/* NAVBAR START */
 * {
     margin: 0;
     padding: 0;
@@ -26,7 +25,7 @@ body {
 
 .navbar {
     width: 100%;
-    background-color: #FAF8EC;
+    background-color: var(--color-cream);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -74,28 +73,6 @@ body {
     background-color: #fc63b2;
     color: #ffffff;
 }
-
-.btn-mulai {
-    background-color: #fee137;
-    list-style: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-family: 'Fredoka', sans-serif;
-    font-weight: bold;
-    color: #333; 
-    text-decoration: none;
-    box-shadow: 0px 4px 10px -1px rgba(0,0,0,0.1);
-    border: 1px solid transparent;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn-mulai:hover {
-    font-family: 'Fredoka', sans-serif;
-    background-color: #fc63b2;
-    color: #ffffff;
-    border: 1px solid #270749;
-}
-
 .menu-toggle {
     display: none;
     cursor: pointer;
@@ -131,4 +108,4 @@ body {
         display: flex;
     }
 }
-/* NAVBAR END */
+

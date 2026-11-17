@@ -15,22 +15,6 @@
   text-align: left;
 }
 
-.galeri-frame-section .close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background: #eee;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  color: #111;
-}
-
 .galeri-frame-section .header h1 {
   font-size: 24px;
   margin-bottom: 8px;
