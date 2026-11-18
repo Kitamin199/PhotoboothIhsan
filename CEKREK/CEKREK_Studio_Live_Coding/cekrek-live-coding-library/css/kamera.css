@@ -1,164 +1,166 @@
-/* Halaman studio */
-.studio { 
-  width: 90%; 
-  max-width: 1100px; 
-  margin: 50px auto; 
-}
-h1 { 
-  margin: 0; 
-  font: 48px Fredoka, sans-serif; 
-}
-.subjudul { 
-  margin: 5px 0 25px; 
-  color: #7a3e53; 
-}
-.kotak-studio { 
-  background: #faf8ec; 
-  border-radius: 18px; 
-  overflow: hidden; 
-}
-h2 { 
-  margin: 0; 
-  padding: 20px; 
-  border-bottom: 1px solid #ccc; 
-  color: #7a3e53; 
-  font-size: 16px; 
+html, body { overflow-x: clip; }
+
+#studio {
+  display: grid;
+  grid-template-columns: minmax(0, 2.22fr) minmax(0, 1fr);
+  align-items: start;
+  gap: .7em 1.2em;
+  padding: 2.6em 10.6% 1em;
+  scroll-margin-top: 116px;
+  background: #faed9b;
+  color: #283044;
+  font: clamp(15px, 1.12vw, 20px)/1.3 Arial, sans-serif;
 }
 
-/* Area kamera dan frame */
-.isi-studio { 
-  display: flex; 
-  gap: 25px; 
-  padding: 30px; 
-}
-.kotak-kamera { 
-  flex: 3; 
-  min-height: 360px; 
-  background: #eae4d2; 
-  border-radius: 15px; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  position: relative; 
-  overflow: hidden; 
-  padding: 20px;
+#studio * {
+  font-family: inherit;
+  font-size: inherit;
 }
 
-/* Panggung = tampilan frame ala photobooth asli.
-   Susunan lapisan: slot foto (bawah) -> video kamera -> gambar frame (atas) */
-.panggung {
-  --rasio: 0.5;
+#studio header {
+  grid-column: 1 / -1;
+  padding-left: .15em;
+}
+
+#studio h1 {
+  font-size: 2.6em;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+
+#studio p {
+  font-size: max(13px, .83em);
+}
+
+#studio header p {
+  display: table;
+  margin-top: .2em;
+  padding: .72em 1.5em;
+  border-radius: 2em;
+  background: #ffe9f1;
+  color: #b34469;
+  font-size: .88em;
+  font-weight: bold;
+}
+
+#studio button {
+  font-weight: bold;
+}
+
+#studio button:enabled {
+  cursor: pointer;
+}
+
+.area-kamera {
   position: relative;
-  width: min(100%, calc(660px * var(--rasio)));
-  aspect-ratio: var(--rasio);
-  background: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
-}
-#wadah-slot { 
-  position: absolute; 
-  inset: 0; 
-  z-index: 1; 
-}
-.slot { 
-  position: absolute; 
-  background: #d9d2bd; 
-  overflow: hidden; 
-}
-.slot img { 
-  display: block; 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-}
-.slot img:not([src]) { 
-  visibility: hidden; 
-}
-#kamera { 
-  position: absolute; 
-  z-index: 2; 
-  object-fit: cover; 
-  transform: scaleX(-1); 
-}
-#bingkai-atas { 
-  position: absolute; 
-  inset: 0; 
-  width: 100%; 
-  height: 100%; 
-  z-index: 3; 
-  pointer-events: none; 
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1.51;
+  overflow: hidden;
+  border-radius: 1.2em;
+  background: #f3eee4;
 }
 
-/* Panel kanan */
-.bagian-frame { 
-  flex: 1; 
-  min-width: 180px; 
-  text-align: center; 
-}
-.info-frame { 
-  margin: 0; 
-  padding: 14px; 
-  background: #eae4d2; 
-  border-radius: 12px; 
-  color: #7a3e53; 
-  font-size: 13px; 
-}
-.info-frame strong { 
-  font-size: 18px; 
-}
-.ganti-frame { 
-  display: inline-block; 
-  margin-top: 10px; 
-  color: #fb71a4; 
-  font-size: 13px; 
+#kamera {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
 }
 
-/* Tombol Studio */
-button { 
-  cursor: pointer; 
-  font-family: inherit; 
+#nyalakan, #jepret {
+  background: var(--color-pink);
 }
-#nyalakan, #unduh, #ulang { 
-  border: 0; 
-  padding: 14px 18px; 
-  background: #fb71a4; 
-  color: white; 
-  border-radius: 12px; 
-  margin: 10px 2px; 
-}
-#nyalakan { 
-  position: absolute; 
-  z-index: 5; 
-  left: 50%; 
-  bottom: 28px; 
-  transform: translateX(-50%); 
-  margin: 0; 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .3); 
-}
-#jepret { 
-  display: block; 
-  width: 75px; 
-  height: 75px; 
-  margin: 25px auto; 
-  background: #fb71a4; 
-  border: 7px solid #eae4d2; 
-  border-radius: 50%; 
-}
-#jepret:disabled { 
-  opacity: .45; 
-  cursor: not-allowed; 
-}
-#pesan { 
-  padding: 0 30px 25px; 
-  color: #7a3e53; 
-}
-[hidden] { display: none !important; }
 
-/* Tampilan HP Studio */
-@media (max-width: 700px) {
-  h1 { font-size: 32px; }
-  .isi-studio { flex-direction: column; padding: 15px; }
-  .kotak-kamera { min-height: 380px; padding: 12px; }
-  .panggung { width: min(100%, calc(560px * var(--rasio))); }
-  .bagian-frame { max-width: 270px; width: 100%; margin: auto; }
-  #pesan { padding: 0 15px 20px; }
+#nyalakan {
+  width: 39%;
+  min-width: 10em;
+  min-height: 3.5em;
+  border: 0;
+  border-radius: .8em;
+  color: white;
+  font-size: 1.08em;
+}
+
+#jepret {
+  position: absolute;
+  bottom: 1.1em;
+  width: 5.5em;
+  aspect-ratio: 1;
+  border: .25em solid white;
+  border-radius: 50%;
+}
+
+#pesan {
+  margin-top: 2.05em;
+  padding: .94em 1.65em;
+  border-radius: 1em;
+  background: #fff0f5;
+  color: #99566e;
+}
+
+.pilihan-frame {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.3em 1.15em;
+  padding: 1.35em;
+  border: 1px solid #ece5d9;
+  border-radius: 1.5em;
+  background: white;
+}
+
+.pilihan-frame p, #hasil {
+  grid-column: 1 / -1;
+}
+
+.pilihan-frame p {
+  padding: .9em 1.65em;
+  border-radius: 1em;
+  background: #ffeaf1;
+  color: #a54b66;
+}
+
+#nama-frame {
+  display: block;
+  color: #b94b72;
+  font-size: 2.1em;
+  line-height: 1.05;
+}
+
+#hasil {
+  justify-self: center;
+  width: auto;
+  height: 15.3em;
+  max-width: 100%;
+  object-fit: contain;
+  margin-bottom: .8em;
+}
+
+.pilihan-frame button {
+  min-height: max(44px, 3.4em);
+  border: 1px solid #f5d4bb;
+  border-radius: .85em;
+  background: #fffaf4;
+  color: #67464a;
+}
+
+@media (min-width: 851px) and (max-height: 800px) {
+  #studio { padding-block: 1em; }
+  .area-kamera { max-height: 60svh; }
+}
+
+@media (max-width: 850px) {
+  #studio {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 5%;
+  }
+
+  #studio h1 { font-size: clamp(24px, 6vw, 38px); }
+  #nyalakan { min-height: 44px; }
+  #jepret { width: clamp(48px, 12vw, 75px); bottom: 12px; }
+  #pesan { margin-top: 12px; }
 }

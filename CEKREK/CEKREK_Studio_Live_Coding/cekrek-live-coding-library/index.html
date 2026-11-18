@@ -159,33 +159,27 @@
       </section>
 
   <!-- STUDIO KAMERA SECTION -->
-  <main class="studio" id="studio">
-    <h1>STUDIO PHOTOBOOTH</h1>
-    <p class="subjudul">COBA KAMERA LANGSUNG DISINI</p>
+  <main id="studio">
+    <header>
+      <h1>STUDIO PHOTOBOOTH</h1>
+      <p>PHOTOBOOTH / LIVE STUDIO</p>
+    </header>
 
-    <section class="kotak-studio">
-      <h2>● PHOTOBOOTH / LIVE STUDIO</h2>
-      <div class="isi-studio">
-        <div class="kotak-kamera">
-          <!-- Panggung: lubang foto (slot) + video kamera + frame di paling atas -->
-          <div id="panggung" class="panggung">
-            <div id="wadah-slot"></div>
-            <video id="kamera" autoplay muted playsinline hidden></video>
-            <img id="bingkai-atas" alt="Frame terpilih">
-          </div>
-          <button id="nyalakan">NYALAKAN KAMERA</button>
-        </div>
-
-        <div class="bagian-frame">
-          <p class="info-frame">Frame terpilih:<br><strong id="nama-frame">Frame 1</strong></p>
-          <a href="#galeri-frame" class="ganti-frame">Ganti frame</a>
-          <button id="jepret" aria-label="Ambil foto" disabled></button>
-          <button id="unduh" hidden>Unduh PNG</button>
-          <button id="ulang" hidden>Foto Ulang</button>
-        </div>
+    <div>
+      <div class="area-kamera">
+        <video id="kamera" aria-label="Pratinjau kamera" autoplay muted playsinline hidden></video>
+        <button id="nyalakan" type="button">Nyalakan Kamera</button>
+        <button id="jepret" type="button" aria-label="Jepret foto" disabled></button>
       </div>
-      <p id="pesan" role="status">Pilih frame di Galeri Frame, nyalakan kamera, lalu ambil 3 foto.</p>
-    </section>
+      <p id="pesan" role="status">Frame 1. Nyalakan kamera untuk mulai mengambil foto.</p>
+    </div>
+
+    <aside class="pilihan-frame">
+      <p>Frame terpilih<strong id="nama-frame">Frame 1</strong></p>
+      <canvas id="hasil" width="734" height="1800" role="img" aria-label="Hasil foto dalam frame terpilih"></canvas>
+      <button id="ulang" type="button" disabled>Ulang</button>
+      <button id="unduh" type="button" disabled>Unduh</button>
+    </aside>
   </main>
 
   <!-- FAQ -->
