@@ -13,7 +13,6 @@ html, body { overflow-x: clip; }
 }
 
 #studio * {
-  font-family: Fredoka, sans-serif;
   font-family: inherit;
   font-size: inherit;
 }
@@ -34,7 +33,6 @@ html, body { overflow-x: clip; }
 }
 
 #studio header p {
-  font-family: Fredoka, sans-serif;
   display: table;
   margin-top: .2em;
   padding: .72em 1.5em;
@@ -42,11 +40,11 @@ html, body { overflow-x: clip; }
   background: #ffe9f1;
   color: #b34469;
   font-size: .88em;
-   font-weight: 800;
+  font-weight: bold;
 }
 
 #studio button {
-   font-weight: 800;
+  font-weight: bold;
 }
 
 #studio button:enabled {
@@ -126,8 +124,6 @@ html, body { overflow-x: clip; }
 }
 
 #nama-frame {
-  font-family: Fredoka, sans-serif;
-  font-weight: 400;
   display: block;
   color: #b94b72;
   font-size: 2.1em;

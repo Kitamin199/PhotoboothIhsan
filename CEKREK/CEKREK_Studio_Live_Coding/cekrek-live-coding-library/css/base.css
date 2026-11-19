@@ -1,6 +1,5 @@
 @font-face { font-family: Fredoka; src: url('../assets/fredoka-one.ttf'); }
 @font-face { font-family: Jakarta; src: url('../assets/jakarta-400.ttf'); }
-@font-face { font-family: Jakarta; src: url('../assets/jakarta-800.ttf'); font-weight: 800; }
 
 :root {
   --font-sans: "Plus Jakarta Sans", sans-serif;  

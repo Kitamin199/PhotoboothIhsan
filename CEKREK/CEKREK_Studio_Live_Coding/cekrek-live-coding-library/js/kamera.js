@@ -57,23 +57,21 @@ function gambarHasil() {
   kuas.drawImage(bingkai, 0, 0, hasil.width, hasil.height);
 }
 
-function perbaruiStudio() {
-  let aktif = Boolean(kamera.srcObject);
-  let selesai = foto.length === 3;
-
+function perbaruiStudio(pesanKhusus) {
+  const aktif = Boolean(kamera.srcObject);
+  const selesai = foto.length === 3;
   kamera.hidden = !aktif;
   nyalakan.hidden = aktif || selesai;
-  jepret.disabled = !aktif || selesai;
-  ulang.disabled = !aktif && foto.length === 0;
+  jepret.disabled = !aktif || nyalakan.disabled || selesai;
+  ulang.disabled = nyalakan.disabled || (!aktif && foto.length === 0);
 
-  let petunjuk = 'Nyalakan kamera untuk mulai foto.';
-  if (selesai) petunjuk = 'Foto selesai. Pilih Unduh atau Ulang.';
-  else if (aktif) petunjuk = 'Ambil foto ' + (foto.length + 1) + ' dari 3.';
-
-  pesan.textContent = petunjuk;
+  let petunjuk = 'Nyalakan kamera untuk mulai mengambil foto.';
+  if (selesai) petunjuk = 'Tiga foto sudah siap. Pilih Unduh atau Ulang.';
+  else if (nyalakan.disabled) petunjuk = 'Izinkan akses kamera di browser.';
+  else if (aktif) petunjuk = 'Tekan tombol bulat untuk foto ' + (foto.length + 1) + ' dari 3.';
+  pesan.textContent = pesanKhusus || namaFrame.textContent + '. ' + petunjuk;
   gambarHasil();
 }
-
 
 function matikanKamera() {
   if (kamera.srcObject) {
@@ -82,14 +80,30 @@ function matikanKamera() {
   }
 }
 
-
 async function nyalakanKamera() {
-  kamera.srcObject = await navigator.mediaDevices.getUserMedia({ video: true });
-  kamera.hidden = false;
-  await kamera.play();
-  perbaruiStudio();
-}
+  if (!navigator.mediaDevices?.getUserMedia) {
+    pesan.textContent = 'Buka halaman melalui localhost atau HTTPS untuk memakai kamera.';
+    return;
+  }
 
+  nyalakan.disabled = true;
+  perbaruiStudio();
+  let peringatan;
+  try {
+    kamera.srcObject = await navigator.mediaDevices.getUserMedia({ video: true });
+    kamera.hidden = false;
+    kamera.srcObject.getVideoTracks()[0].onended = () => {
+      matikanKamera();
+      perbaruiStudio('Kamera terputus. Nyalakan kamera lagi untuk melanjutkan.');
+    };
+    await kamera.play();
+  } catch {
+    matikanKamera();
+    peringatan = 'Kamera belum bisa dibuka. Periksa izin kamera di browser.';
+  }
+  nyalakan.disabled = false;
+  perbaruiStudio(peringatan);
+}
 
 function ambilFoto() {
   if (jepret.disabled || kamera.readyState < 2) return;
