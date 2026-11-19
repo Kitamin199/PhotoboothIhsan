@@ -49,6 +49,7 @@
 .galeri-frame-section .card.yellow { background-color: #fffde7; }
 .galeri-frame-section .card.purple { background-color: #f3e5f5; }
 .galeri-frame-section .card.green  { background-color: #e8f5e9; }
+.galeri-frame-section .card.red  { background-color: #ffe1ca; }
 
 .galeri-frame-section .card.active {
   border-color: #fbc02d;
