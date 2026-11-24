@@ -160,26 +160,41 @@
 
   <!-- STUDIO KAMERA SECTION -->
   <main id="studio">
-    <header>
-      <h1>STUDIO PHOTOBOOTH</h1>
-      <p>PHOTOBOOTH / LIVE STUDIO</p>
+    <header class="studio-heading">
+      <p class="studio-label">Tentang Studio</p>
+      <h1>Coba studio PhotoBooth</h1>
+      <p class="studio-deskripsi">Pilih layout dan coba kamera langsung di sini.</p>
     </header>
 
-    <div>
-      <div class="area-kamera">
-        <video id="kamera" aria-label="Pratinjau kamera" autoplay muted playsinline hidden></video>
-        <button id="nyalakan" type="button">Nyalakan Kamera</button>
-        <button id="jepret" type="button" aria-label="Jepret foto" disabled></button>
+    <section class="studio-card" aria-label="Studio kamera">
+      <div class="studio-bar">
+        <span>PHOTOBOOTH / LIVE STUDIO</span>
       </div>
-      <p id="pesan" role="status">Frame 1. Nyalakan kamera untuk mulai mengambil foto.</p>
-    </div>
 
-    <aside class="pilihan-frame">
-      <p>Frame terpilih<strong id="nama-frame">Frame 1</strong></p>
-      <canvas id="hasil" width="734" height="1800" role="img" aria-label="Hasil foto dalam frame terpilih"></canvas>
-      <button id="ulang" type="button" disabled>Ulang</button>
-      <button id="unduh" type="button" disabled>Unduh</button>
-    </aside>
+      <div class="studio-body">
+        <div class="studio-kamera">
+          <div class="area-kamera">
+            <video id="kamera" aria-label="Pratinjau kamera"
+                   autoplay muted playsinline hidden></video>
+
+            <button id="nyalakan" type="button">Nyalakan Kamera</button>
+            <button id="jepret" type="button" aria-label="Jepret foto" disabled></button>
+          </div>
+
+          <p id="pesan" role="status">Nyalakan kamera untuk mulai foto.</p>
+        </div>
+
+        <aside class="pilihan-frame">
+          <p>Frame terpilih <strong id="nama-frame">Frame 1</strong></p>
+
+          <canvas id="hasil" width="734" height="1800"
+                  role="img" aria-label="Hasil foto dalam frame terpilih"></canvas>
+
+          <button id="ulang" type="button" disabled>Ulang</button>
+          <button id="unduh" type="button" disabled>Unduh</button>
+        </aside>
+      </div>
+    </section>
   </main>
 
   <!-- FAQ -->

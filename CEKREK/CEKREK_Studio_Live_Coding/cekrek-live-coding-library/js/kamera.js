@@ -1,11 +1,59 @@
 // Setiap slot ditulis sebagai [jarak dari kiri, jarak dari atas, lebar, tinggi].
 const daftarFrame = {
-  1: { lebar: 734, tinggi: 1800, slot: [[41, 32, 656, 447], [41, 516, 656, 447], [41, 1000, 656, 447]] },
-  2: { lebar: 623, tinggi: 1800, slot: [[60, 60, 502, 500], [60, 629, 502, 500], [60, 1198, 502, 500]] },
-  3: { lebar: 600, tinggi: 1800, slot: [[36, 295, 529, 404], [36, 745, 529, 404], [36, 1195, 529, 404]] },
-  4: { lebar: 800, tinggi: 1800, slot: [[68, 84, 676, 410], [68, 612, 676, 410], [68, 1138, 676, 410]] },
-  5: { lebar: 808, tinggi: 1808, slot: [[60, 67, 697, 496], [52, 643, 697, 514], [60, 1227, 697, 496]] },
-  6: { lebar: 770, tinggi: 2178, slot: [[42, 53, 687, 586], [42, 693, 687, 585], [42, 1332, 687, 586]] }
+  1: {
+    lebar: 734,
+    tinggi: 1800,
+    slot: [
+      [41, 32, 656, 447],
+      [41, 516, 656, 447],
+      [41, 1000, 656, 447]
+    ]
+  },
+  2: {
+    lebar: 623,
+    tinggi: 1800,
+    slot: [
+      [60, 60, 502, 500],
+      [60, 629, 502, 500],
+      [60, 1198, 502, 500]
+    ]
+  },
+  3: {
+    lebar: 600,
+    tinggi: 1800,
+    slot: [
+      [36, 295, 529, 404],
+      [36, 745, 529, 404],
+      [36, 1195, 529, 404]
+    ]
+  },
+  4: {
+    lebar: 800,
+    tinggi: 1800,
+    slot: [
+      [68, 84, 676, 410],
+      [68, 612, 676, 410],
+      [68, 1138, 676, 410]
+    ]
+  },
+  5: {
+    lebar: 808,
+    tinggi: 1808,
+    slot: [
+      [60, 67, 697, 496],
+      [52, 643, 697, 514],
+      [60, 1227, 697, 496]
+    ]
+  },
+  6: {
+    lebar: 770,
+    tinggi: 2178,
+    slot: [
+      [42, 53, 687, 586],
+      [42, 693, 687, 585],
+      [42, 1332, 687, 586]
+    ]
+  }
 };
 
 const kamera = document.getElementById('kamera');
@@ -58,8 +106,8 @@ function gambarHasil() {
 }
 
 function perbaruiStudio() {
-  let aktif = Boolean(kamera.srcObject);
-  let selesai = foto.length === 3;
+  const aktif = Boolean(kamera.srcObject);
+  const selesai = foto.length === 3;
 
   kamera.hidden = !aktif;
   nyalakan.hidden = aktif || selesai;
@@ -74,7 +122,6 @@ function perbaruiStudio() {
   gambarHasil();
 }
 
-
 function matikanKamera() {
   if (kamera.srcObject) {
     kamera.srcObject.getTracks().forEach(jalur => jalur.stop());
@@ -82,14 +129,12 @@ function matikanKamera() {
   }
 }
 
-
 async function nyalakanKamera() {
   kamera.srcObject = await navigator.mediaDevices.getUserMedia({ video: true });
   kamera.hidden = false;
   await kamera.play();
   perbaruiStudio();
 }
-
 
 function ambilFoto() {
   if (jepret.disabled || kamera.readyState < 2) return;
@@ -140,8 +185,13 @@ jepret.onclick = ambilFoto;
 ulang.onclick = fotoUlang;
 unduh.onclick = unduhFoto;
 bingkai.onload = gambarHasil;
-bingkai.onerror = () => { pesan.textContent = 'Frame gagal dimuat. Periksa folder gambar.'; };
-window.addEventListener('pagehide', () => { matikanKamera(); perbaruiStudio(); });
+bingkai.onerror = () => {
+  pesan.textContent = 'Frame gagal dimuat. Periksa folder gambar.';
+};
+window.addEventListener('pagehide', () => {
+  matikanKamera();
+  perbaruiStudio();
+});
 
 document.addEventListener('frame-dipilih', kejadian => pasangFrame(kejadian.detail.id));
 const pilihan = document.querySelector('.galeri-frame-section .card.active');
