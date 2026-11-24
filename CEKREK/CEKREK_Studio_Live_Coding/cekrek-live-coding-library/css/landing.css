@@ -72,11 +72,11 @@
   text-decoration: none;  
   /* transition: translate 0.2s;*/         
 }
-.startbutton { background: var(--color-yellow); color: var(--color-ink); } 
-.galeriframe { background: var(--color-yellow); color: var(--color-ink); }   
+.startbutton { background: var(--color-pink); color: var(--color-ink); } 
+.galeriframe { background: var(--color-pink-soft); color: var(--color-ink); }   
 
-.startbutton:hover { background: var(--color-pink-soft); translate: 0 -4px; } 
-.galeriframe:hover { background: var(--color-pink-soft); translate: 0 -4px; } 
+.startbutton:hover { background: var(--color-yellow-soft); translate: 0 -4px; } 
+.galeriframe:hover { background: var(--color-yellow-soft); translate: 0 -4px; } 
 
 .bunnystrip,
 .kamera,
