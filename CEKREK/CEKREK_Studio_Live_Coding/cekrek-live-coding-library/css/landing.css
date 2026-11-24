@@ -1,12 +1,14 @@
 .hero {
   position: relative;        
   min-height: 100vh;         
-  padding: 0 20px 60px; 
+  min-height: 100svh;
+  padding: 60px clamp(16px, 5vw, 80px);
+  overflow: hidden; 
   display: flex;             
   flex-direction: column;    
   align-items: center;       
   justify-content: center;   
-  gap: 16px;                 
+  gap: clamp(16px, 3vw, 32px);                 
   text-align: center;        
 }
 .hero > * {                
@@ -18,7 +20,7 @@
   align-items: center;               
   justify-content: center;
   gap: 14px;                     
-  font: 700 1rem var(--font-display);
+  font: 700 clamp(0.75rem, 2vw, 1rem) var(--font-display);
   letter-spacing: 3px;               
   text-transform: uppercase;        
 }
@@ -27,76 +29,86 @@
   font-family: var(--font-display);  
   font-weight: 700;                  
   line-height: 1.05;                 
-  letter-spacing: 1px;               
+  letter-spacing: 1px;  
+  text-wrap: balance;             
 }
 .judul.atas {                        
-  font-size: clamp(2.8rem, 8vw, 6rem);   
+  font-size: clamp(2.8rem, 7vw, 5.5rem);   
   color: var(--color-ink);           
 }
 .judul.bawah {                      
-  font-size: clamp(2.8rem, 9vw, 6.6rem); 
+  font-size: clamp(2.8rem, 8vw, 6.2rem); 
   color: var(--color-pink);          
-  -webkit-text-stroke: 12px var(--color-white); 
+  -webkit-text-stroke: clamp(5px, 1.2vw, 12px)var(--color-white); 
   paint-order: stroke fill;          
   filter: drop-shadow(0 5px 0 rgba(122, 62, 83, 0.35))        
           drop-shadow(0 10px 14px rgba(251, 113, 164, 0.35)); 
   margin-bottom: 10px;
 }
 .deskripsi {
-  font-size: clamp(1rem, 2.2vw, 1.3rem); 
+  margin: 20px auto 0;
+  max-width: 40em;
+  font-size: clamp(0.95rem, 2.2vw, 1.3rem); 
   font-weight: 700;
   line-height: 1.5;                  
   color: var(--color-plum);
+  text-wrap: balance;
 }
 
 .tombol-grup {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;                   
-  gap: 18px;                        
+  gap: 16px;     
+  width: 100%;                   
 }
 .startbutton,
 .galeriframe {                       
-  padding: 16px 34px;                
+  padding: 16px clamp(22px, 4vw, 34px);                
   border: 1px solid var(--color-ink);
   border-radius: 999px;              
   font-weight: 800;
-  font-size: 1.1rem;
-  text-decoration: none;           
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  text-decoration: none;  
+  /* transition: translate 0.2s;*/         
 }
 .startbutton { background: var(--color-yellow); color: var(--color-ink); } 
 .galeriframe { background: var(--color-yellow); color: var(--color-ink); }   
 
-.startbutton:hover { background: var(--color-pink-soft); } 
-.galeriframe:hover { background: var(--color-pink-soft); } 
+.startbutton:hover { background: var(--color-pink-soft); translate: 0 -4px; } 
+.galeriframe:hover { background: var(--color-pink-soft); translate: 0 -4px; } 
 
 .bunnystrip,
 .kamera,
 .sparkle,
-.hasil{
+.strip-foto{
   position: absolute;                
   z-index: 1;                        
   pointer-events: none;              
 }
 .bunnystrip img,
 .kamera img,
-.sparkle img,
-.hasil img {
+.sparkle img {
   display: block;                    
   width: 100%;                       
   height: auto;                      
 }
 .bunnystrip {
     position: absolute;
-    width: 100vw;
-    max-width: none;
+    width: 100%;
     top: 0;
     left: 0;
     opacity: 0.5;
+    height: 140px;
+    flex-shrink: 0;
+}
+.bunnystrip img {
+    min-width: 120px;
+    object-fit: cover;
 }
 
 .kamera {
-  width: 150px;
+  width: clamp(100px, 8vw, 150px);
   top: 20%;                          
   left: calc(60% + min(18vw, 340px));
   rotate: 10deg;
@@ -118,15 +130,24 @@
 .sparkle.s3 {                       
   width: 34px;
   top: 48%;
-  left: calc(40% - min(26vw, 500px));
+  left: calc(40% - min(26vw, 250px));
   animation-delay: 1.5s;
 }
-.hasil {
-  width: 200px;
-  top: 30%;
-  rotate: -20deg;
-  left: calc(40% - min(26vw, 500px));
+.strip-foto {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
+.strip-foto img {
+  position: absolute;
+  display: block;
+  width: clamp(100px, 10vw, 180px);
+  height: auto;
+  filter: drop-shadow(0 8px 12px rgba(122, 62, 83, 0.25));
+}
+.strip-foto img:nth-child(1) { left: 18%;  top: 38%; rotate: -10deg; }
+.strip-foto img:nth-child(2) { right: 18%; top: 38%; rotate: 10deg; }
 @keyframes besar {                  
   50% { scale: 1.08; }              
 }
@@ -142,13 +163,16 @@
 }
 
 @media (max-width: 900px) {          
-  .bunnystrip { top: 90px; }
   .kamera { width: 90px; top: 22%; }
   .sparkle.s3 { display: none; }     
   .judul.bawah { -webkit-text-stroke: 7px var(--color-white); }
+  .strip-foto { display: none; }
 }
 @media (max-width: 520px) {          
-  .garis { width: 30px; }
-  .startbutton, .galeriframe { width: 100%; text-align: center; }
+  .kamera, .sparkle {display: none; }
+  .startbutton, .galeriframe { width: 100%; text-align: center; max-width: 340px;}
   .sparkle.s2 { display: none; }
+  .bunnystrip { opacity: 0.35; height: 140px; }
+  .deskripsi br { display: none; }
 }
+
