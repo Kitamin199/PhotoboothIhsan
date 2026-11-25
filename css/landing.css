@@ -8,6 +8,11 @@
   background: #fbf8ef;
   color: #241e22;
   overflow: hidden;
+  background: repeating-linear-gradient(
+        90deg,
+        var(--color-cream) 0 28px,
+        #f7ebc9 28px 56px
+    );
 }
 .hero-label {
   display: inline-block;
@@ -39,7 +44,7 @@
   border-radius: 24px; box-shadow: 1px 3px #483342;
 }
 .hero-aksi .startbutton { background: #fc81b0; }
-.hero-aksi a:hover { transform: translateY(-2px); }
+.hero-aksi a:hover { transform: translateY(-2px); background: #e681a8; }
 .hero-strip { position: relative; width: 100%; height: clamp(330px, 39vw, 550px); }
 .hero-strip img {
   position: absolute; object-fit: contain;

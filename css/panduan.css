@@ -1,8 +1,8 @@
 .panduan {
-    --kertas: #f6ebce;
-    --tinta: #54221f;
+    --kertas: #f7ebc9;
+    --tinta: var(--color-ink);
 
-    color: #172e47;
+    color: var(--color-plum);
     background-color: var(--kertas);
     background-image:
         linear-gradient(#82633010 1px, transparent 1px),
@@ -19,7 +19,7 @@
 
 .panduan p {
     font: 400 16px/1.6 Jakarta, sans-serif;
-    color: #764c40;
+    color: var(--color-ink);
 }
 
 .panduan .label-panduan {
@@ -31,14 +31,14 @@
 
 .panduan h2,
 .panduan h3 {
-    font-family: Georgia, serif;
+    font-family: Fredoka, sans-serif;
     font-weight: 400;
 }
 
 .panduan h2 {
     font-size: clamp(44px, 5.6vw, 84px);
     line-height: 1.02;
-    letter-spacing: -.055em;
+    letter-spacing: -.030em;
     margin: 16px 0 22px;
 }
 
@@ -47,8 +47,8 @@
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1px;
-    border: 1px solid var(--tinta);
-    background: var(--tinta);
+    border: 1px solid var(--color-ink);
+    background: var(--color-ink);
 }
 
 .panduan li {
@@ -60,12 +60,18 @@
 .nomor-panduan {
     display: inline-block;
     padding: 8px;
-    border: 1px solid var(--tinta);
-    color: var(--tinta);
-    font: 800 12px Jakarta, sans-serif;
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    font: 800 12px Fredoka, sans-serif;
 }
 
 .panduan svg {
+    display: block;
+    width: 100%;
+    margin: 12px 0 20px;
+    background: var(--tinta);
+}
+.panduan img {
     display: block;
     width: 100%;
     margin: 12px 0 20px;
