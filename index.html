@@ -82,7 +82,7 @@
           <span class="nomor-panduan" aria-hidden="true">03</span>
           <svg viewBox="0 0 160 136" aria-hidden="true" focusable="false"><g><path d="M27 46h24l9-14h39l10 14h22a6 6 0 0 1 6 6v44H23V52z"/><circle cx="80" cy="70" r="20"/><circle cx="80" cy="70" r="12"/><path d="M113 55h12"/></g></svg>
           <h3>Ambil tiga pose</h3>
-          <p>Tekan tombol jepret untuk setiap pose. Ikuti hitung mundur jika timer aktif.</p>
+          <p>Tekan jepret sekali. Kamera mengambil tiga pose berurutan dengan jeda untuk berganti gaya.</p>
         </li>
         <li>
           <span class="nomor-panduan" aria-hidden="true">04</span>
@@ -211,18 +211,22 @@
           </div>
           <div class="kontrol" role="group" aria-label="Kontrol kamera">
             <div class="alat-kiri">
-              <label>Filter<select id="filter"><option value="none">Original</option><option value="grayscale(1)">Monokrom</option><option value="sepia(1)">Sepia</option><option value="contrast(1.3)">Kontras</option></select></label>
-              <button type="button" id="stiker" aria-pressed="false">Stiker</button>
-              <button type="button" id="buka-hasil" disabled>Hasil</button>
+              <button type="button" id="filter" value="none" title="Ganti filter kamera">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 17h18"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg>
+                <span>Normal</span>
+              </button>
+              <button type="button" id="timer" value="0" title="Ganti durasi timer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="8"/><path d="M12 6V3m-3 0h6m3 5 2-2m-8 8 3-4"/></svg>
+                <span>Timer: Mati</span>
+              </button>
+              <button type="button" id="cermin" aria-pressed="true" title="Balik arah kamera">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M3 7l5 5-5 5zM21 7l-5 5 5 5z"/></svg>
+                <span>Cermin</span>
+              </button>
             </div>
-            <button id="jepret" type="button" aria-label="Ambil foto" title="Ambil foto" disabled></button>
-            <div class="alat-kanan">
-              <button id="kilat" aria-pressed="false">Flash</button>
-              <label>Timer<select id="timer"><option value="0">Mati</option><option value="1">1 dtk</option><option value="3" selected>3 dtk</option><option value="5">5 dtk</option></select></label>
-              <button id="cermin" aria-pressed="true">Cermin</button>
-            </div>
+            <button id="jepret" type="button" aria-label="Mulai sesi foto otomatis" title="Mulai sesi foto otomatis" disabled></button>
           </div>
-          <p id="pesan" role="status">Nyalakan kamera untuk mulai foto.</p>
+          <p id="pesan" role="status"></p>
         </div>
         <aside class="pilihan-frame">
           <p>Frame terpilih <strong id="nama-frame">Frame 1</strong></p>
@@ -246,7 +250,7 @@
 
     <div class="item">
       <button class="pertanyaan">2. Bagaimana cara menggunakan CekRek?<span class="panah"></span></button>
-      <p class="jawaban">Gampang banget! Pilih frame yang kamu suka, klik tombol nyalakan kamera, lalu izinkan akses kamera di browser. Setelah itu jepret 3 foto satu per satu dengan pose terbaikmu. Kalau sudah puas, tinggal unduh hasilnya sebagai gambar PNG. Kalau kurang cocok, kamu bisa foto ulang sepuasnya!</p>
+      <p class="jawaban">Gampang banget! Pilih frame yang kamu suka, klik tombol nyalakan kamera, lalu izinkan akses kamera di browser. Tekan jepret sekali, lalu ganti pose untuk foto kedua dan ketiga. Kalau sudah puas, tinggal unduh hasilnya sebagai gambar PNG. Kalau kurang cocok, kamu bisa foto ulang sepuasnya!</p>
     </div>
 
     <div class="item">

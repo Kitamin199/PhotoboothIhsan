@@ -79,48 +79,73 @@ const filterFoto = document.getElementById('filter');
 const timerFoto = document.getElementById('timer');
 const hitung = document.getElementById('hitung');
 const cermin = document.getElementById('cermin');
-const kilat = document.getElementById('kilat');
-const stiker = document.getElementById('stiker');
-const bukaHasil = document.getElementById('buka-hasil');
-bukaHasil.onclick = () => { location.hash = '#tinjau'; };
-stiker.onclick = () => {
-  balikPilihan(stiker);
-  gambarHasil();
+const durasiTimer = [0, 3, 5, 10];
+timerFoto.onclick = () => {
+  const indeks = durasiTimer.indexOf(Number(timerFoto.value));
+  const detik = durasiTimer[(indeks + 1) % durasiTimer.length];
+  timerFoto.value = String(detik);
+  timerFoto.querySelector('span').textContent = detik ? 'Timer: ' + detik + 's' : 'Timer: Mati';
 };
 const area = document.querySelector('.area-kamera');
-filterFoto.onchange = () => { kamera.style.filter = filterFoto.value; };
+const daftarFilter = [
+  ['Normal', 'none'],
+  ['Monokrom', 'grayscale(1)'],
+  ['Sepia', 'sepia(1)'],
+  ['Kontras', 'contrast(1.3)']
+];
+let indeksFilter = 0;
+filterFoto.onclick = () => {
+  indeksFilter = (indeksFilter + 1) % daftarFilter.length;
+  const [nama, efek] = daftarFilter[indeksFilter];
+  filterFoto.value = efek;
+  filterFoto.querySelector('span').textContent = nama;
+  kamera.style.filter = efek;
+};
 function balikPilihan(tombol) {
   const aktif = tombol.getAttribute('aria-pressed') !== 'true';
   tombol.setAttribute('aria-pressed', String(aktif));
   return aktif;
 }
 cermin.onclick = () => { kamera.style.transform = balikPilihan(cermin) ? 'scaleX(-1)' : 'none'; };
-kilat.onclick = () => balikPilihan(kilat);
 
 function batalHitung() {
-  clearInterval(hitungAktif);
+  clearTimeout(hitungAktif);
+  area.classList.remove('flash');
   hitungAktif = null;
   hitung.textContent = '';
 }
 
 function mulaiHitung() {
   if (jepret.disabled || kamera.readyState < 2) return;
-  let sisa = Number(timerFoto.value);
-  if (sisa === 0) {
-    ambilFoto();
-    return;
-  }
-  hitung.textContent = sisa;
-  hitungAktif = setInterval(() => {
-    sisa -= 1;
-    if (sisa > 0) {
-      hitung.textContent = sisa;
-      return;
-    }
+  jadwalkanPose(Number(timerFoto.value));
+}
+
+function jadwalkanPose(sisa) {
+  if (location.hash !== '#studio' || !kamera.srcObject || kamera.readyState < 2) {
     batalHitung();
     perbaruiStudio();
-    if (location.hash === '#studio') ambilFoto();
-  }, 1000);
+    return;
+  }
+
+  hitung.textContent = sisa || '';
+  if (sisa > 0) {
+    hitungAktif = setTimeout(() => jadwalkanPose(sisa - 1), 1000);
+  } else {
+    ambilFoto();
+    area.classList.add('flash');
+    hitungAktif = setTimeout(() => {
+      area.classList.remove('flash');
+      if (foto.length === 3) {
+        matikanKamera();
+        perbaruiStudio();
+        if (location.hash === '#studio') location.hash = '#tinjau';
+      } else if (Number(timerFoto.value) === 0) {
+        hitungAktif = setTimeout(() => jadwalkanPose(0), 1380);
+      } else {
+        jadwalkanPose(Number(timerFoto.value));
+      }
+    }, 120);
+  }
   perbaruiStudio();
 }
 
@@ -129,7 +154,7 @@ function pasangFrame(nomor) {
   if (!frame) return;
 
   nomorFrame = nomor;
-  namaFrame.textContent = frame.nama || ('Frame ' + nomor);
+  namaFrame.textContent = frame.nama;
   hasil.width = frame.lebar;
   hasil.height = frame.tinggi;
   bingkai.src = 'gambar/framee' + nomor + '.png';
@@ -139,7 +164,6 @@ function pasangFrame(nomor) {
 function gambarHasil() {
   const siap = bingkai.complete && bingkai.naturalWidth > 0;
   unduh.disabled = foto.length !== 3 || !siap;
-  bukaHasil.disabled = unduh.disabled;
   document.getElementById('lihat-hasil').hidden = unduh.disabled;
   if (!siap) return;
 
@@ -160,13 +184,6 @@ function gambarHasil() {
 
   // PNG berada di atas foto agar hiasan frame tetap terlihat.
   kuas.drawImage(bingkai, 0, 0, hasil.width, hasil.height);
-  if (stiker.getAttribute('aria-pressed') === 'true') {
-    kuas.font = 'bold 64px sans-serif';
-    kuas.fillStyle = '#e94f95';
-    for (const [x, y] of daftarFrame[nomorFrame].slot) {
-      kuas.fillText('✦', x + 8, y + 62);
-    }
-  }
 }
 
 function perbaruiStudio() {
@@ -178,15 +195,15 @@ function perbaruiStudio() {
   kamera.hidden = !aktif;
   nyalakan.hidden = aktif || selesai;
   jepret.disabled = !aktif || selesai || hitungAktif !== null;
-  for (const kontrol of [timerFoto, filterFoto, cermin, kilat, stiker]) {
+  for (const kontrol of [timerFoto, filterFoto, cermin]) {
     kontrol.disabled = hitungAktif !== null;
   }
   document.getElementById('pose').textContent = 'Pose ' + Math.min(foto.length + 1, 3) + ' / 3';
   ulang.disabled = !aktif && foto.length === 0;
 
-  let petunjuk = 'Nyalakan kamera untuk mulai foto.';
+  let petunjuk = '';
   if (selesai) petunjuk = 'Foto selesai. Pilih Unduh atau Ulang.';
-  else if (aktif) petunjuk = 'Ambil foto ' + (foto.length + 1) + ' dari 3.';
+  else if (hitungAktif !== null) petunjuk = 'Siap untuk pose ' + (foto.length + 1) + ' dari 3.';
 
   pesan.textContent = petunjuk;
   gambarHasil();
@@ -222,7 +239,6 @@ async function nyalakanKamera() {
 }
 
 function ambilFoto() {
-  if (jepret.disabled || kamera.readyState < 2) return;
 
   // Simpan bagian yang terlihat di kamera, termasuk arah cerminnya.
   const rasio = kamera.clientWidth / kamera.clientHeight;
@@ -242,14 +258,7 @@ function ambilFoto() {
   if (!filterBawaan && filterFoto.value !== 'none') {
     filterPiksel(kuas, gambar.width, gambar.height, filterFoto.value);
   }
-  if (kilat.getAttribute('aria-pressed') === 'true') {
-    area.classList.add('flash');
-    setTimeout(() => area.classList.remove('flash'), 110);
-  }
   foto.push(gambar);
-  if (foto.length === 3) matikanKamera();
-  perbaruiStudio();
-  if (foto.length === 3) location.hash = '#tinjau';
 }
 
 // Cadangan untuk browser yang belum mendukung filter pada canvas.

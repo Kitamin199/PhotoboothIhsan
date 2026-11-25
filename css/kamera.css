@@ -106,6 +106,8 @@
     inset: 0;
     background: white;
     pointer-events: none;
+    opacity: .55;
+    z-index: 3;
 }
 
 #nyalakan {
@@ -163,6 +165,8 @@
 #studio button:disabled {
     opacity: .5;
 }
+
+#pesan:empty { display: none; }
 
 #pesan {
     text-align: center;
@@ -289,60 +293,54 @@
     gap: 12px;
 }
 
-.alat-kiri,
-.alat-kanan {
+.alat-kiri {
     display: flex;
     align-items: center;
     gap: 6px;
     flex-wrap: wrap;
 }
 
-.alat-kanan {
-    justify-content: flex-end;
-}
-
-.alat-kiri > *,
-.alat-kanan > * {
+.alat-kiri > * {
     text-align: center;
 }
 
-.alat-kiri > button,
-.alat-kiri > label {
+.alat-kiri {
     display: grid;
-    align-content: center;
-    min-height: 58px;
+    grid-template-columns: 1fr 1.18fr 1fr;
+    width: min(100%, 248px);
+    gap: 8px;
+}
+
+.alat-kiri > button {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 7px;
+    min-width: 0;
+    min-height: 66px;
+    padding: 5px 2px;
+    border: 2px solid #fb71a4;
+    border-radius: 20px;
     background: white;
-    padding: 6px;
-    border: 2px solid #f69abe;
-    border-radius: 16px;
-    box-shadow: 0 3px #f69abe;
+    color: #783c53;
+    box-shadow: 0 4px #fb71a4;
+    font: 800 12px Jakarta, sans-serif;
+    white-space: nowrap;
+}
+
+.alat-kiri svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .kontrol select {
     padding: 3px;
     font-size: 12px;
-}
-
-.alat-kanan button,
-.alat-kanan label {
-    border-radius: 50%;
-    width: 54px;
-    height: 54px;
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    font-size: 11px;
-}
-
-.alat-kanan label {
-    border: 1px solid #dabec8;
-    background: white;
-}
-
-.alat-kanan select {
-    border: 0;
-    padding: 0;
-    background: transparent;
 }
 
 #jepret {
@@ -368,8 +366,7 @@
         grid-row: 1;
     }
 
-    .alat-kiri,
-    .alat-kanan {
+    .alat-kiri {
         justify-content: center;
     }
 }
@@ -410,7 +407,6 @@
 
 .studio-body {
     grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
-    align-items: center;
     gap: clamp(16px, 2vw, 28px);
 }
 
@@ -440,7 +436,7 @@
 }
 
 #hasil {
-    height: clamp(190px, 19vw, 260px);
+    height: clamp(275px, 29vw, 420px);
 }
 
 .pilihan-frame button {
@@ -460,30 +456,14 @@
 }
 
 .kontrol {
-    background: #faf8ef;
     border-radius: 18px;
     padding: 12px;
     margin: 12px 0;
 }
 
-.alat-kiri,
-.alat-kanan {
+.alat-kiri {
     min-width: 0;
 }
-
-.alat-kiri button::before {
-    display: block;
-    font-size: 20px;
-}
-
-#stiker::before {
-    content: '✧';
-}
-
-#buka-hasil::before {
-    content: '▧';
-}
-
 
 /* ========================================
    RESPONSIVE DESIGN
@@ -504,8 +484,7 @@
         grid-column: 1 / -1;
     }
 
-    .alat-kiri,
-    .alat-kanan {
+    .alat-kiri {
         justify-content: center;
     }
 }
@@ -514,4 +493,8 @@
     .kontrol {
         grid-template-columns: minmax(0, 1fr);
     }
+}
+@media (max-width: 1250px) {
+    .kontrol { grid-template-columns: 1fr; justify-items: center; }
+    #jepret { grid-row: 1; grid-column: 1; }
 }
