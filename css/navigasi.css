@@ -1,0 +1,28 @@
+[hidden] { display: none !important; }
+
+[data-layar]:focus { outline: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-layar]:not([hidden]) { animation: masuk-layar 220ms ease-out; }
+  @keyframes masuk-layar {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+#studio #lihat-hasil {
+  grid-column: 1 / -1;
+  justify-self: center;
+  color: #82405a;
+  font-weight: 700;
+}
+
+#studio.mode-hasil .studio-kamera,
+#studio.mode-hasil .studio-bar,
+#studio.mode-hasil #lihat-hasil { display: none; }
+
+#studio.mode-hasil .studio-body { display: block; }
+#studio.mode-hasil .studio-card,
+#studio .judul-hasil { max-width: 520px; margin-inline: auto; }
+#studio .judul-hasil h1 { margin-bottom: 16px; font: 400 32px Fredoka, sans-serif; }
+#studio.mode-hasil #hasil { height: clamp(240px, 48svh, 560px); }

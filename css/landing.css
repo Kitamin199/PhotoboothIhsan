@@ -1,0 +1,53 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 52px);
+  min-height: calc(100svh - 90px);
+  padding: clamp(32px, 5vw, 72px) max(5vw, calc((100% - 1280px) / 2));
+  background: #fbf8ef;
+  color: #241e22;
+  overflow: hidden;
+}
+.hero-label {
+  display: inline-block;
+  padding: 6px 16px;
+  background: white;
+  color: #8e365c;
+  border-radius: 20px;
+  box-shadow: 0 2px #392732;
+  font: 800 12px Jakarta, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#judul-beranda {
+  margin: 22px 0 16px;
+  font: 400 clamp(38px, 4.9vw, 76px)/1.08 Fredoka, sans-serif;
+  letter-spacing: -.035em;
+}
+#judul-beranda em {
+  font: inherit;
+  color: #a83269;
+  text-decoration: underline #eea3bb 3px;
+  text-underline-offset: .1em;
+}
+.hero-deskripsi { max-width: 41ch; font: 400 clamp(16px, 1.35vw, 20px)/1.6 Jakarta, sans-serif; }
+.hero-aksi { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.hero-aksi a {
+  text-decoration: none; color: #34232e; font: 800 15px Jakarta, sans-serif;
+  padding: 13px 22px; background: white; border: 1px solid #483342;
+  border-radius: 24px; box-shadow: 1px 3px #483342;
+}
+.hero-aksi .startbutton { background: #fc81b0; }
+.hero-aksi a:hover { transform: translateY(-2px); }
+.hero-strip { position: relative; width: 100%; height: clamp(330px, 39vw, 550px); }
+.hero-strip img {
+  position: absolute; object-fit: contain;
+  filter: drop-shadow(3px 7px 3px #47283730);
+}
+.hero-strip img:first-child { width: 52%; height: 77%; top: 16%; left: 3%; transform: rotate(-8deg); }
+.hero-strip img:last-child { width: 58%; height: 94%; top: 3%; left: 37%; transform: rotate(7deg); }
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 36px 6vw 28px; }
+  .hero-strip { justify-self: center; max-width: 390px; height: clamp(265px, 68vw, 350px); }
+}
