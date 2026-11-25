@@ -78,7 +78,7 @@
   text-align: center;
 }
 
-.footer-logo { height: 70px; }
+.footer-logo { height: 50px; }
 .tengah  { flex: 1; }
 .tagline { margin: 0 0 10px; font-size: 18px; }
 .copy    { margin: 10px 0 0; font-size: 13px; }
