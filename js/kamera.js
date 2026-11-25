@@ -1,6 +1,7 @@
 // Setiap slot ditulis sebagai [jarak dari kiri, jarak dari atas, lebar, tinggi].
 const daftarFrame = {
   1: {
+    nama: 'Red Varsity Club',
     lebar: 734,
     tinggi: 1800,
     slot: [
@@ -10,6 +11,7 @@ const daftarFrame = {
     ]
   },
   2: {
+    nama: 'Gingham Picnic',
     lebar: 623,
     tinggi: 1800,
     slot: [
@@ -19,6 +21,7 @@ const daftarFrame = {
     ]
   },
   3: {
+    nama: 'SRIFOTON 2026',
     lebar: 600,
     tinggi: 1800,
     slot: [
@@ -28,6 +31,7 @@ const daftarFrame = {
     ]
   },
   4: {
+    nama: 'Sunny Goldfish Booth',
     lebar: 800,
     tinggi: 1800,
     slot: [
@@ -37,6 +41,7 @@ const daftarFrame = {
     ]
   },
   5: {
+    nama: 'Velvet Leopard Strip',
     lebar: 808,
     tinggi: 1808,
     slot: [
@@ -46,6 +51,7 @@ const daftarFrame = {
     ]
   },
   6: {
+    nama: 'Hibachi Mana Pastel',
     lebar: 770,
     tinggi: 2178,
     slot: [
@@ -123,7 +129,7 @@ function pasangFrame(nomor) {
   if (!frame) return;
 
   nomorFrame = nomor;
-  namaFrame.textContent = 'Frame ' + nomor;
+  namaFrame.textContent = frame.nama || ('Frame ' + nomor);
   hasil.width = frame.lebar;
   hasil.height = frame.tinggi;
   bingkai.src = 'gambar/framee' + nomor + '.png';
