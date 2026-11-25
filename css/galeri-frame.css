@@ -1,8 +1,8 @@
 .galeri-frame-section {
   background-color: #f8f9fa;
-  padding: 40px 20px;
-  margin-top: 50px;
-  border-top: 2px dashed #ddd;
+  padding: 24px 20px 40px 20px;
+  margin-top: 0;
+  border-top: none;
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
