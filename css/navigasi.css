@@ -10,13 +10,7 @@
   }
 }
 
-#studio #lihat-hasil {
-  grid-column: 1 / -1;
-  justify-self: center;
-  color: #82405a;
-  font-weight: 700;
-}
-
+#studio:not(.mode-hasil) #unduh,
 #studio.mode-hasil .studio-kamera,
 #studio.mode-hasil .studio-bar,
 #studio.mode-hasil #lihat-hasil { display: none; }
