@@ -62,263 +62,160 @@ const daftarFrame = {
   }
 };
 
-const kamera = document.getElementById('kamera');
-const hasil = document.getElementById('hasil');
-const namaFrame = document.getElementById('nama-frame');
-const pesan = document.getElementById('pesan');
-const nyalakan = document.getElementById('nyalakan');
-const jepret = document.getElementById('jepret');
-const ulang = document.getElementById('ulang');
-const unduh = document.getElementById('unduh');
-
+// Elemen studio dan pilihan sesi.
+const id = nama => document.getElementById(nama);
+const video = id('kamera');
+const hasil = id('hasil');
 const bingkai = new Image();
 const foto = [];
-let nomorFrame = 1;
-let hitungAktif = null;
-const filterFoto = document.getElementById('filter');
-const timerFoto = document.getElementById('timer');
-const hitung = document.getElementById('hitung');
-const cermin = document.getElementById('cermin');
-const durasiTimer = [0, 3, 5, 10];
-timerFoto.onclick = () => {
-  const indeks = durasiTimer.indexOf(Number(timerFoto.value));
-  const detik = durasiTimer[(indeks + 1) % durasiTimer.length];
-  timerFoto.value = String(detik);
-  timerFoto.querySelector('span').textContent = detik ? 'Timer: ' + detik + 's' : 'Timer: Mati';
-};
 const area = document.querySelector('.area-kamera');
-const daftarFilter = [
-  ['Normal', 'none'],
-  ['Monokrom', 'grayscale(1)'],
-  ['Sepia', 'sepia(1)'],
-  ['Kontras', 'contrast(1.3)']
-];
-let indeksFilter = 0;
-filterFoto.onclick = () => {
-  indeksFilter = (indeksFilter + 1) % daftarFilter.length;
-  const [nama, efek] = daftarFilter[indeksFilter];
-  filterFoto.value = efek;
-  filterFoto.querySelector('span').textContent = nama;
-  kamera.style.filter = efek;
+const tunggu = ms => new Promise(selesai => setTimeout(selesai, ms));
+let frame = daftarFrame[1];
+let sibuk = false;
+
+const filter = ['none', 'grayscale(1)', 'sepia(1)', 'contrast(1.3)'];
+const namaFilter = ['Normal', 'Monokrom', 'Sepia', 'Kontras'];
+const timer = [0, 3, 5, 10];
+let efek = 0;
+let waktu = 0;
+let cermin = true;
+
+id('filter').onclick = () => {
+  efek = (efek + 1) % filter.length;
+  video.style.filter = filter[efek];
+  id('filter').querySelector('span').textContent = namaFilter[efek];
 };
-function balikPilihan(tombol) {
-  const aktif = tombol.getAttribute('aria-pressed') !== 'true';
-  tombol.setAttribute('aria-pressed', String(aktif));
-  return aktif;
-}
-cermin.onclick = () => { kamera.style.transform = balikPilihan(cermin) ? 'scaleX(-1)' : 'none'; };
-
-function batalHitung() {
-  clearTimeout(hitungAktif);
-  area.classList.remove('flash');
-  hitungAktif = null;
-  hitung.textContent = '';
-}
-
-function mulaiHitung() {
-  if (jepret.disabled || kamera.readyState < 2) return;
-  jadwalkanPose(Number(timerFoto.value));
-}
-
-function jadwalkanPose(sisa) {
-  if (location.hash !== '#studio' || !kamera.srcObject || kamera.readyState < 2) {
-    batalHitung();
-    perbaruiStudio();
-    return;
-  }
-
-  hitung.textContent = sisa || '';
-  if (sisa > 0) {
-    hitungAktif = setTimeout(() => jadwalkanPose(sisa - 1), 1000);
-  } else {
-    ambilFoto();
-    area.classList.add('flash');
-    hitungAktif = setTimeout(() => {
-      area.classList.remove('flash');
-      if (foto.length === 3) {
-        matikanKamera();
-        perbaruiStudio();
-        if (location.hash === '#studio') location.hash = '#tinjau';
-      } else if (Number(timerFoto.value) === 0) {
-        hitungAktif = setTimeout(() => jadwalkanPose(0), 1380);
-      } else {
-        jadwalkanPose(Number(timerFoto.value));
-      }
-    }, 120);
-  }
-  perbaruiStudio();
-}
+id('timer').onclick = () => {
+  waktu = (waktu + 1) % timer.length;
+  id('timer').querySelector('span').textContent = 'Timer: ' + (timer[waktu] ? timer[waktu] + 's' : 'Mati');
+};
+id('cermin').onclick = () => {
+  cermin = !cermin;
+  video.style.transform = cermin ? 'scaleX(-1)' : 'none';
+  id('cermin').setAttribute('aria-pressed', String(cermin));
+};
 
 function pasangFrame(nomor) {
-  const frame = daftarFrame[nomor];
-  if (!frame) return;
-
-  nomorFrame = nomor;
-  namaFrame.textContent = frame.nama;
+  frame = daftarFrame[nomor];
+  id('nama-frame').textContent = frame.nama;
   hasil.width = frame.lebar;
   hasil.height = frame.tinggi;
   bingkai.src = 'gambar/framee' + nomor + '.png';
   perbaruiStudio();
 }
 
-function gambarHasil() {
-  const siap = bingkai.complete && bingkai.naturalWidth > 0;
-  unduh.disabled = foto.length !== 3 || !siap;
-  document.getElementById('lihat-hasil').hidden = unduh.disabled;
-  if (!siap) return;
-
-  const kuas = hasil.getContext('2d');
-  kuas.fillStyle = 'white';
-  kuas.fillRect(0, 0, hasil.width, hasil.height);
-
-  foto.forEach((gambar, urutan) => {
-    const [x, y, lebar, tinggi] = daftarFrame[nomorFrame].slot[urutan];
-    // Potong dari tengah agar foto memenuhi slot tanpa menjadi gepeng.
-    const skala = Math.max(lebar / gambar.width, tinggi / gambar.height);
-    const lebarPotong = lebar / skala;
-    const tinggiPotong = tinggi / skala;
-    kuas.drawImage(gambar,
-      (gambar.width - lebarPotong) / 2, (gambar.height - tinggiPotong) / 2,
-      lebarPotong, tinggiPotong, x, y, lebar, tinggi);
-  });
-
-  // PNG berada di atas foto agar hiasan frame tetap terlihat.
-  kuas.drawImage(bingkai, 0, 0, hasil.width, hasil.height);
-}
-
-function perbaruiStudio() {
-  const aktif = Boolean(kamera.srcObject);
-  const selesai = foto.length === 3;
-
-  document.getElementById('status-live').textContent = aktif ? 'LIVE' : 'STANDBY';
-  document.getElementById('pose').hidden = !aktif;
-  kamera.hidden = !aktif;
-  nyalakan.hidden = aktif || selesai;
-  jepret.disabled = !aktif || selesai || hitungAktif !== null;
-  for (const kontrol of [timerFoto, filterFoto, cermin]) {
-    kontrol.disabled = hitungAktif !== null;
-  }
-  document.getElementById('pose').textContent = 'Pose ' + Math.min(foto.length + 1, 3) + ' / 3';
-  ulang.disabled = !aktif && foto.length === 0;
-
-  let petunjuk = '';
-  if (selesai) petunjuk = 'Foto selesai. Pilih Unduh atau Ulang.';
-  else if (hitungAktif !== null) petunjuk = 'Siap untuk pose ' + (foto.length + 1) + ' dari 3.';
-
-  pesan.textContent = petunjuk;
-  gambarHasil();
-}
-
-function matikanKamera() {
-  batalHitung();
-  if (kamera.srcObject) {
-    kamera.srcObject.getTracks().forEach(jalur => jalur.stop());
-    kamera.srcObject = null;
-  }
-}
-
-async function nyalakanKamera() {
-  nyalakan.disabled = true;
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    if (location.hash !== '#studio') {
-      stream.getTracks().forEach(jalur => jalur.stop());
-      return;
-    }
-    kamera.srcObject = stream;
-    kamera.hidden = false;
-    await kamera.play();
-    perbaruiStudio();
-  } catch {
-    matikanKamera();
-    perbaruiStudio();
-    pesan.textContent = 'Kamera belum bisa dibuka. Periksa akses kamera, lalu coba lagi.';
-  } finally {
-    nyalakan.disabled = false;
-  }
-}
-
+// Ambil bagian tengah video sesuai bentuk pratinjau.
 function ambilFoto() {
-
-  // Simpan bagian yang terlihat di kamera, termasuk arah cerminnya.
-  const rasio = kamera.clientWidth / kamera.clientHeight;
   const gambar = document.createElement('canvas');
-  gambar.width = Math.round(Math.min(kamera.videoWidth, kamera.videoHeight * rasio));
+  const rasio = video.clientWidth / video.clientHeight;
+  gambar.width = Math.round(Math.min(video.videoWidth, video.videoHeight * rasio));
   gambar.height = Math.round(gambar.width / rasio);
   const kuas = gambar.getContext('2d');
-  if (cermin.getAttribute('aria-pressed') === 'true') {
+  if (cermin) {
     kuas.translate(gambar.width, 0);
     kuas.scale(-1, 1);
   }
-  const filterBawaan = 'filter' in kuas;
-  if (filterBawaan) kuas.filter = filterFoto.value;
-  kuas.drawImage(kamera, (gambar.width - kamera.videoWidth) / 2,
-    (gambar.height - kamera.videoHeight) / 2);
-
-  if (!filterBawaan && filterFoto.value !== 'none') {
-    filterPiksel(kuas, gambar.width, gambar.height, filterFoto.value);
-  }
+  kuas.filter = filter[efek];
+  kuas.drawImage(video, (gambar.width - video.videoWidth) / 2, (gambar.height - video.videoHeight) / 2);
   foto.push(gambar);
 }
 
-// Cadangan untuk browser yang belum mendukung filter pada canvas.
-function filterPiksel(kuas, lebar, tinggi, efek) {
-  const citra = kuas.getImageData(0, 0, lebar, tinggi);
-  const data = citra.data;
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i], g = data[i + 1], b = data[i + 2];
-    if (efek === 'grayscale(1)') {
-      data[i] = data[i + 1] = data[i + 2] = .2126*r + .7152*g + .0722*b;
-    } else if (efek === 'sepia(1)') {
-      data[i] = .393*r + .769*g + .189*b;
-      data[i + 1] = .349*r + .686*g + .168*b;
-      data[i + 2] = .272*r + .534*g + .131*b;
-    } else if (efek === 'contrast(1.3)') {
-      for (let k = i; k < i + 3; k++) data[k] = (data[k] - 127.5) * 1.3 + 127.5;
+// Gambar foto di tiap slot, kemudian letakkan bingkai PNG di atasnya.
+function gambarStrip() {
+  const kuas = hasil.getContext('2d');
+  kuas.fillStyle = 'white';
+  kuas.fillRect(0, 0, hasil.width, hasil.height);
+  foto.forEach((gambar, i) => {
+    const [x, y, lebar, tinggi] = frame.slot[i];
+    const skala = Math.max(lebar / gambar.width, tinggi / gambar.height);
+    const w = lebar / skala;
+    const h = tinggi / skala;
+    kuas.drawImage(gambar, (gambar.width-w)/2, (gambar.height-h)/2, w, h, x, y, lebar, tinggi);
+  });
+  if (bingkai.naturalWidth) kuas.drawImage(bingkai, 0, 0, hasil.width, hasil.height);
+}
+
+async function mulaiSesi() {
+  if (sibuk || video.readyState < 2) return;
+  const stream = video.srcObject;
+  sibuk = true;
+  perbaruiStudio();
+  for (let pose = foto.length + 1; pose <= 3; pose++) {
+    for (let sisa = timer[waktu]; sisa > 0; sisa--) {
+      id('hitung').textContent = sisa;
+      await tunggu(1000);
+      if (video.srcObject !== stream) return;
+    }
+    id('hitung').textContent = '';
+    ambilFoto();
+    perbaruiStudio();
+    area.classList.add('flash');
+    await tunggu(120);
+    if (video.srcObject !== stream) return;
+    area.classList.remove('flash');
+    if (timer[waktu] === 0 && pose < 3) {
+      await tunggu(1380);
+      if (video.srcObject !== stream) return;
     }
   }
-  kuas.putImageData(citra, 0, 0);
+  matikanKamera();
+  perbaruiStudio();
 }
 
-function fotoUlang() {
+function matikanKamera() {
+  video.srcObject?.getTracks().forEach(track => track.stop());
+  video.srcObject = null;
+  sibuk = false;
+  id('hitung').textContent = '';
+  area.classList.remove('flash');
+}
+
+function perbaruiStudio() {
+  const aktif = Boolean(video.srcObject);
+  const selesai = foto.length === 3;
+  video.hidden = !aktif;
+  id('pose').hidden = !aktif;
+  id('pose').textContent = 'Pose ' + Math.min(foto.length + 1, 3) + ' / 3';
+  id('nyalakan').hidden = aktif || selesai;
+  id('jepret').disabled = !aktif || sibuk;
+  id('ulang').disabled = !aktif && !foto.length;
+  id('unduh').disabled = !selesai || !bingkai.complete || !bingkai.naturalWidth;
+  id('lihat-hasil').disabled = sibuk || id('unduh').disabled;
+  for (const nama of ['filter', 'timer', 'cermin']) id(nama).disabled = sibuk;
+  gambarStrip();
+}
+
+id('nyalakan').onclick = async () => {
+  id('nyalakan').disabled = true;
+  try {
+    video.srcObject = await navigator.mediaDevices.getUserMedia({ video: true });
+    if (location.hash !== '#studio') return matikanKamera();
+    await video.play();
+    id('pesan').textContent = '';
+  } catch {
+    matikanKamera();
+    id('pesan').textContent = 'Kamera belum bisa dibuka. Periksa izin kamera.';
+  } finally {
+    id('nyalakan').disabled = false;
+    perbaruiStudio();
+  }
+};
+id('jepret').onclick = mulaiSesi;
+id('ulang').onclick = () => {
   matikanKamera();
   foto.length = 0;
+  perbaruiStudio();
   location.hash = '#studio';
-  perbaruiStudio();
-}
-
-function unduhFoto() {
-  if (unduh.disabled) return;
-  const tautan = document.createElement('a');
-  tautan.download = 'cekrek-frame-' + nomorFrame + '.png';
-  try {
-    hasil.toBlob(berkas => {
-      if (!berkas) {
-        pesan.textContent = 'PNG gagal dibuat. Coba unduh lagi.';
-        return;
-      }
-      tautan.href = URL.createObjectURL(berkas);
-      tautan.click();
-      setTimeout(() => URL.revokeObjectURL(tautan.href), 1000);
-    }, 'image/png');
-  } catch {
-    pesan.textContent = 'Unduhan gagal. Buka halaman lewat Live Server lalu coba lagi.';
-  }
-}
-
-nyalakan.onclick = nyalakanKamera;
-jepret.onclick = mulaiHitung;
-ulang.onclick = fotoUlang;
-unduh.onclick = unduhFoto;
-bingkai.onload = gambarHasil;
-bingkai.onerror = () => {
-  pesan.textContent = 'Frame gagal dimuat. Periksa folder gambar.';
 };
-window.addEventListener('pagehide', () => {
-  matikanKamera();
-  perbaruiStudio();
-});
+id('lihat-hasil').onclick = () => { location.hash = '#tinjau'; };
+id('unduh').onclick = () => {
+  const tautan = document.createElement('a');
+  tautan.download = 'cekrek-' + frame.nama + '.png';
+  tautan.href = hasil.toDataURL('image/png');
+  tautan.click();
+};
 
-document.addEventListener('frame-dipilih', kejadian => pasangFrame(kejadian.detail.id));
-const pilihan = document.querySelector('.galeri-frame-section .card.active');
-pasangFrame(Number(pilihan?.dataset.frame) || 1);
+bingkai.onload = perbaruiStudio;
+window.addEventListener('pagehide', matikanKamera);
+document.addEventListener('frame-dipilih', e => pasangFrame(e.detail.id));
+pasangFrame(1);
