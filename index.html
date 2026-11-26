@@ -200,7 +200,7 @@
       <div class="studio-body">
         <div class="studio-kamera">
           <div class="area-kamera">
-            <span id="status-live">STANDBY</span>
+            
             <span class="sudut-lensa" aria-hidden="true"></span>
             <video id="kamera" aria-label="Pratinjau kamera" autoplay muted playsinline hidden></video>
             <span id="pose">Pose 1 / 3</span>
@@ -210,15 +210,15 @@
           <div class="kontrol" role="group" aria-label="Kontrol kamera">
             <div class="alat-kiri">
               <button type="button" id="filter" value="none" title="Ganti filter kamera">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 17h18"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg>
+                <img src="gambar/ikon-filter.svg" alt="">
                 <span>Normal</span>
               </button>
               <button type="button" id="timer" value="0" title="Ganti durasi timer">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="8"/><path d="M12 6V3m-3 0h6m3 5 2-2m-8 8 3-4"/></svg>
+                <img src="gambar/ikon-timer.svg" alt="">
                 <span>Timer: Mati</span>
               </button>
               <button type="button" id="cermin" aria-pressed="true" title="Balik arah kamera">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M3 7l5 5-5 5zM21 7l-5 5 5 5z"/></svg>
+                <img src="gambar/ikon-cermin.svg" alt="">
                 <span>Cermin</span>
               </button>
             </div>
@@ -229,8 +229,8 @@
         <aside class="pilihan-frame">
           <p>Frame terpilih <strong id="nama-frame">Frame 1</strong></p>
           <canvas id="hasil" width="734" height="1800" role="img" aria-label="Pratinjau strip"></canvas>
-          <a href="#tinjau" id="lihat-hasil" hidden>Lihat hasil</a>
           <button id="ulang" type="button" disabled>Ulang</button>
+          <button id="lihat-hasil" type="button" disabled>Lihat Hasil</button>
           <button id="unduh" type="button" disabled>Unduh PNG</button>
         </aside>
       </div>
