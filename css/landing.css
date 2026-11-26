@@ -50,9 +50,10 @@
   position: absolute; object-fit: contain;
   filter: drop-shadow(3px 7px 3px #47283730);
 }
-.hero-strip img:first-child { width: 52%; height: 77%; top: 16%; left: 3%; transform: rotate(-8deg); }
-.hero-strip img:last-child { width: 58%; height: 94%; top: 3%; left: 37%; transform: rotate(7deg); }
+.hero-strip img:nth-child(1) { width: 52%; height: 77%; top: 16%; left: 3%; transform: rotate(-8deg); }
+.hero-strip img:nth-child(2){ width: 58%; height: 94%; top: 3%; left: 37%; transform: rotate(7deg); }
 @media (max-width: 720px) {
   .hero { grid-template-columns: 1fr; min-height: auto; padding: 36px 6vw 28px; }
   .hero-strip { justify-self: center; max-width: 390px; height: clamp(265px, 68vw, 350px); }
 }
+  
