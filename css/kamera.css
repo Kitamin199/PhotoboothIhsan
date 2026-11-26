@@ -9,46 +9,70 @@
     font-family: Jakarta, sans-serif;
 }
 
-#studio :is(button, select, label, a) {
+#studio button {
     font-family: inherit;
 }
 
-#studio button:enabled,
-#studio select {
+#studio button:enabled {
     cursor: pointer;
 }
 
-.studio-heading,
+#studio button:disabled {
+    opacity: .5;
+}
+
+/* Judul dan tata letak studio */
+
+.studio-heading {
+    max-width: 1280px;
+    margin: 0 auto 24px;
+    text-align: left;
+}
+
+.studio-heading .label-studio {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.studio-heading p {
+    color: #854359;
+}
+
+.studio-heading h1 {
+    font: 400 clamp(26px, 4vw, 40px) Fredoka, sans-serif;
+    margin: 8px 0;
+    color: #241e22;
+}
+
 .judul-hasil {
     text-align: center;
     margin-bottom: 22px;
 }
 
-.studio-heading h1,
-.judul-hasil h1 {
-    font: 400 clamp(26px, 4vw, 40px) Fredoka, sans-serif;
-}
-
 .studio-card {
     max-width: 1280px;
     margin: auto;
+    border: 2px solid #272024;
+    border-radius: 28px;
+    background: white;
+    padding: clamp(14px, 2.5vw, 34px);
 }
 
 .studio-body {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(265px, 25vw, 330px);
-    gap: 24px;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    gap: clamp(16px, 2vw, 28px);
     align-items: start;
 }
 
 .studio-kamera,
 .pilihan-frame {
-    background: white;
-    border: 2px solid #efdfd7;
+    min-width: 0;
     border-radius: 26px;
-    padding: clamp(14px, 2vw, 24px);
-    box-shadow: 0 6px 0 #efdcd2;
 }
+
+/* Pratinjau kamera */
 
 .area-kamera {
     position: relative;
@@ -57,16 +81,9 @@
     place-content: center;
     justify-items: center;
     overflow: hidden;
-    aspect-ratio: 16 / 10;
-    border-radius: 18px;
-    background: #d3cecd;
-}
-
-.kamera-idle {
-    width: clamp(60px, 14vw, 155px);
-    max-height: 16vh;
-    object-fit: contain;
-    margin-bottom: 12px;
+    aspect-ratio: 16 / 9;
+    border-radius: 32px;
+    background: #f3eee5;
 }
 
 #kamera {
@@ -79,14 +96,8 @@
 }
 
 #pose {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    color: white;
-    background: #462c37;
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-weight: bold;
+    right: 23px;
+    background: #a93865;
 }
 
 #hitung {
@@ -112,196 +123,25 @@
 
 #nyalakan {
     position: relative;
-    padding: 12px 22px;
+    padding: 16px 30px;
     border-radius: 28px;
     border: 2px solid white;
-    background: #ae315e;
+    background: #f3649c;
     color: white;
     font-weight: 800;
 }
 
-.kontrol {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    margin: 18px auto 12px;
-}
-
-.kontrol label {
-    display: grid;
-    gap: 3px;
-    color: #77374f;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.kontrol select,
-.kontrol button,
-.pilihan-frame button {
-    border: 1px solid #dabec8;
-    background: #fffaf7;
-    color: #4f293b;
-    border-radius: 12px;
-    padding: 9px 10px;
-}
-
-.kontrol [aria-pressed="true"] {
-    background: #ffe4ef;
-    border: 2px solid #b63867;
-}
-
-#jepret {
-    width: 62px;
-    height: 62px;
-    padding: 0;
-    background: #f45e99;
-    border: 5px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px #d04a80;
-}
-
-#studio button:disabled {
-    opacity: .5;
-}
-
-#pesan:empty { display: none; }
-
-#pesan {
-    text-align: center;
-    color: #774359;
-}
-
-.pilihan-frame {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.pilihan-frame :is(h2, p, canvas, a) {
-    grid-column: 1 / -1;
-}
-
-.pilihan-frame h2 {
-    font: 400 24px Fredoka, sans-serif;
-}
-
-#nama-frame {
-    color: #943454;
-}
-
-#hasil {
-    justify-self: center;
-    height: 165px;
-    max-width: 100%;
-    object-fit: contain;
-}
-
-@media (max-width: 850px) {
-    .studio-body {
-        grid-template-columns: 1fr;
-    }
-
-    .studio-kamera,
-    .pilihan-frame {
-        min-width: 0;
-    }
-}
-
-
-/* ========================================
-   VIEWFINDER DAN KONTROL KAMERA
-======================================== */
-
-.studio-kamera {
-    padding: 0;
-    border: 0;
-    box-shadow: none;
-    background: transparent;
-}
-
-.area-kamera {
-    aspect-ratio: 16 / 9;
-    border: 4px solid white;
-    border-radius: 32px;
-    background: #d3cecd;
-    box-shadow: 0 15px 35px #0000000f;
-}
-
-#nyalakan {
-    background: #f3649c;
-    padding: 16px 30px;
-}
-
-#status-live,
-#pose {
-    position: absolute;
-    z-index: 1;
-    top: 23px;
-    padding: 6px 12px;
-    border-radius: 22px;
-    color: white;
-    font-weight: bold;
-}
-
-#status-live {
-    left: 23px;
-    background: #0009;
-}
-
-#pose {
-    left: auto;
-    right: 23px;
-    background: #a93865;
-}
-
-.sudut-lensa {
-    position: absolute;
-    z-index: 1;
-    inset: 15px;
-    pointer-events: none;
-
-    --garis: linear-gradient(white, white);
-
-    background:
-        var(--garis) left top,
-        var(--garis) right top,
-        var(--garis) left bottom,
-        var(--garis) right bottom,
-        var(--garis) left top,
-        var(--garis) right top,
-        var(--garis) left bottom,
-        var(--garis) right bottom;
-
-    background-size:
-        23px 3px,
-        23px 3px,
-        23px 3px,
-        23px 3px,
-        3px 23px,
-        3px 23px,
-        3px 23px,
-        3px 23px;
-
-    background-repeat: no-repeat;
-}
+/* Kontrol sesi foto */
 
 .kontrol {
     display: grid;
     grid-template-columns: 1fr 82px 1fr;
     gap: 12px;
-}
-
-.alat-kiri {
-    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.alat-kiri > * {
-    text-align: center;
+    border-radius: 18px;
+    padding: 12px;
+    margin: 12px 0;
 }
 
 .alat-kiri {
@@ -309,6 +149,8 @@
     grid-template-columns: 1fr 1.18fr 1fr;
     width: min(100%, 248px);
     gap: 8px;
+    align-items: center;
+    min-width: 0;
 }
 
 .alat-kiri > button {
@@ -325,100 +167,43 @@
     color: #783c53;
     box-shadow: 0 4px #fb71a4;
     font: 800 12px Jakarta, sans-serif;
+    text-align: center;
     white-space: nowrap;
 }
 
-.alat-kiri svg {
+.alat-kiri img {
     width: 22px;
     height: 22px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
 }
 
-.kontrol select {
-    padding: 3px;
-    font-size: 12px;
+.kontrol [aria-pressed="true"] {
+    background: #ffe4ef;
+    border: 2px solid #b63867;
 }
 
 #jepret {
     width: 78px;
     height: 78px;
+    padding: 0;
+    background: #f45e99;
+    border: 5px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #d04a80;
     justify-self: center;
-    outline: 2px dashed white;
     outline-offset: -12px;
 }
 
-@media (max-width: 650px) {
-    .area-kamera {
-        aspect-ratio: 4 / 3;
-        border-radius: 24px;
-    }
-
-    .kontrol {
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
-
-    #jepret {
-        grid-row: 1;
-    }
-
-    .alat-kiri {
-        justify-content: center;
-    }
-}
-
-
-/* ========================================
-   STUDIO HEADING DAN LAYOUT
-======================================== */
-
-.studio-heading {
-    max-width: 1280px;
-    margin: 0 auto 24px;
-    text-align: left;
-}
-
-.studio-heading .label-studio {
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #854359;
-}
-
-.studio-heading h1 {
-    margin: 8px 0;
-    color: #241e22;
-}
-
-.studio-heading p {
-    color: #854359;
-}
-
-.studio-card {
-    border: 2px solid #272024;
-    border-radius: 28px;
-    background: white;
-    padding: clamp(14px, 2.5vw, 34px);
-}
-
-.studio-body {
-    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
-    gap: clamp(16px, 2vw, 28px);
-}
-
-
-/* ========================================
-   FRAME DAN HASIL FOTO
-======================================== */
+/* Frame terpilih dan hasil foto */
 
 .pilihan-frame {
-    border: 0;
-    padding: 0;
-    box-shadow: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: white;
+}
+
+.pilihan-frame :is(p, canvas) {
+    grid-column: 1 / -1;
 }
 
 .pilihan-frame p,
@@ -430,44 +215,35 @@
     text-align: left;
 }
 
+#pesan:empty { display: none; }
+
 #nama-frame {
     display: block;
     font: 400 28px Fredoka, sans-serif;
+    color: #943454;
 }
 
 #hasil {
+    justify-self: center;
     height: clamp(275px, 29vw, 420px);
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .pilihan-frame button {
+    border: 1px solid #dabec8;
+    background: #fffaf7;
+    color: #4f293b;
+    border-radius: 12px;
+    padding: 9px 10px;
     min-height: 48px;
     font-weight: 800;
 }
 
-
-/* ========================================
-   PENYESUAIAN TAMPILAN KAMERA
-======================================== */
-
-.area-kamera {
-    background: #f3eee5;
-    border: 0;
-    box-shadow: none;
+@media (max-width: 1250px) {
+    .kontrol { grid-template-columns: 1fr; justify-items: center; }
+    #jepret { grid-row: 1; grid-column: 1; }
 }
-
-.kontrol {
-    border-radius: 18px;
-    padding: 12px;
-    margin: 12px 0;
-}
-
-.alat-kiri {
-    min-width: 0;
-}
-
-/* ========================================
-   RESPONSIVE DESIGN
-======================================== */
 
 @media (max-width: 980px) {
     .studio-body {
@@ -476,25 +252,12 @@
 }
 
 @media (max-width: 650px) {
-    .kontrol {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    #jepret {
-        grid-column: 1 / -1;
+    .area-kamera {
+        aspect-ratio: 4 / 3;
+        border-radius: 24px;
     }
 
     .alat-kiri {
         justify-content: center;
     }
-}
-
-@media (max-width: 480px) {
-    .kontrol {
-        grid-template-columns: minmax(0, 1fr);
-    }
-}
-@media (max-width: 1250px) {
-    .kontrol { grid-template-columns: 1fr; justify-items: center; }
-    #jepret { grid-row: 1; grid-column: 1; }
 }
